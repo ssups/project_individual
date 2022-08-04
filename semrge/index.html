@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <style>
+        body {
+            margin: 0;
+        }
+        canvas {
+            /* background-image: url(./images/image2.jpeg);
+            background-repeat: no-repeat;
+            background-size: cover; */
+            margin: 0;
+        }
+    </style>
+    <body>
+        <canvas class="canvas" width="2000" height="1000"></canvas>
+    </body>
+    <script>
+        const canvas = document.querySelector(".canvas");
+        const ctx = canvas.getContext("2d");
+        const img1 = new Image();
+        const url1 = "./images/image1.jpeg";
+        img1.src = url1;
+        const img3 = new Image();
+        const url3 = "./images/image3.jpeg";
+        img3.src = url3;
+        let isDown = false;
+        ctx.lineJoin = "round";
+        ctx.lineCap = "round";
+        ctx.lineWidth = 200;
+
+        const radian = d => (d * Math.PI) / 180;
+
+        console.log(radian(360));
+        function draw(e) {
+            if (isDown) {
+                let mousePos = { x: e.offsetX, y: e.offsetY };
+                ctx.save();
+                ctx.beginPath();
+                // ctx.arc(
+                //     lastMousePos.x,
+                //     lastMousePos.y,
+                //     100,
+                //     0,
+                //     radian(360),
+                //     false
+                // );
+                // ctx.arc(mousePos.x, mousePos.y, 100, 0, radian(360), false);
+
+                ctx.moveTo(lastMousePos.x, lastMousePos.y);
+                ctx.lineTo(mousePos.x, mousePos.y);
+                // ctx.lineTo(mousePos.x, mousePos.y + 100);
+                // ctx.lineTo(lastMousePos.x, lastMousePos.y);
+
+                ctx.stroke();
+                // ctx.clip();
+                // ctx.drawImage(img3, 0, 0, canvas.width, canvas.height);
+
+                ctx.restore();
+                lastMousePos = { x: e.offsetX, y: e.offsetY };
+            }
+        }
+
+        canvas.onmousedown = e => {
+            isDown = true;
+            lastMousePos = { x: e.offsetX, y: e.offsetY };
+        };
+        canvas.onmouseup = () => {
+            isDown = false;
+        };
+        canvas.onmouseleave = () => {
+            isDown = false;
+        };
+        img3.onload = function () {
+            ctx.drawImage(img1, 0, 0, 2000, 1000);
+            // ctx.drawImage(img3, 0, 0, 2000, 1000);
+            let pattern1 = ctx.createPattern(img3, "repeat");
+            ctx.strokeStyle = pattern1;
+            canvas.addEventListener("mousemove", draw);
+        };
+    </script>
+</html>
