@@ -72,13 +72,12 @@
         };
         canvas.onmouseup = () => {
             isDown = false;
-        };
+        }; 
         canvas.onmouseleave = () => {
             isDown = false;
         };
         img3.onload = function () {
             ctx.drawImage(img1, 0, 0, 2000, 1000);
-            // ctx.drawImage(img3, 0, 0, 2000, 1000);
             let pattern1 = ctx.createPattern(img3, "repeat");
             ctx.strokeStyle = pattern1;
             canvas.addEventListener("mousemove", draw);
