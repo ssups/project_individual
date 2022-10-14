@@ -9,10 +9,13 @@ const Login = ({ setIsLoginPage, setOnLoad }) => {
   const [switched, setSwitched] = useState(false);
   useEffect(() => {
     setIsLoginPage(true);
+    return () => {
+      setIsLoginPage(false);
+    };
   }, []);
   function onClick() {
     setOnLoad(true);
-    setIsLoginPage(false);
+    // setIsLoginPage(false);
     nav("/main");
   }
   return (

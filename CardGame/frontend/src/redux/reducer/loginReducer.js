@@ -2,7 +2,7 @@ const init = {
   id: null,
   nickName: null,
   cards: null,
-  isLogin: false,
+  // isLogin: false,
 };
 function reducer(state = init, { type, payload }) {
   switch (type) {
@@ -10,12 +10,15 @@ function reducer(state = init, { type, payload }) {
       const { user_id: id, nick_name: nickName, cards } = payload;
       return { id, nickName, cards, isLogin: true };
 
+    case "LOGOUT":
+      return { isLogin: false };
+
     default:
       return state;
   }
 }
 
-export const loginReducer = reducer;
+export default reducer;
 
 // 로그인하면 백에서 토큰발급
 // 프론트 app.js 에서 useEffect 빈객체 써서 로그인 체크하는 액션 실행

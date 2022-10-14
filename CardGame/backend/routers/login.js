@@ -40,11 +40,13 @@ router.post("/login", async (req, res) => {
             expiresIn: "1h",
           }
         );
-        // 토큰들 세션에 넣기
-        req.session.access_token = access_token;
-        req.session.refreh_token = refresh_token;
-        console.log(req.session);
-        res.send({ msg: "로그인 성공", success: true, data: user });
+        res.send({
+          msg: "로그인 성공",
+          success: true,
+          data: user,
+          access_token,
+          refresh_token,
+        });
       } else {
         res.send({ msg: "비밀번호 틀림", success: false });
       }
@@ -52,18 +54,16 @@ router.post("/login", async (req, res) => {
   } else res.send({ msg: "가입된 아이디가 없음", success: false });
 });
 
-router.get("/loginCheck", (req, res) => {
-  console.log(req.session);
-  const { access_token, refreh_token } = req.session;
-  jwt.verify(access_token, process.env.ACCESS_TOKEN, (acc_err, acc_success) => {
+router.post("/loginCheck", (req, res) => {
+  const { access_token, refresh_token, user_id } = req.body;
+  jwt.verify(access_token, process.env.ACCESS_TOKEN, async (acc_err, acc_success) => {
     if (acc_err) {
-      console.log("썩은 어세스토큰");
-      jwt.verify(refreh_token, process.env.REFRESH_TOKEN, (ref_err, ref_success) => {
+      jwt.verify(refresh_token, process.env.REFRESH_TOKEN, async (ref_err, ref_success) => {
         if (ref_err) {
-          console.log("썩은 리프레쉬 토큰 혹은 로그인 안됨");
+          console.log("썩은 리프레쉬 토큰");
           res.send({ isLogin: false });
         } else {
-          // access token 재발급
+          console.log("어세스토큰 재발급");
           const re_access_token = jwt.sign(
             {
               user_id: ref_success.user_id,
@@ -75,14 +75,18 @@ router.get("/loginCheck", (req, res) => {
               expiresIn: "15m",
             }
           );
-          req.session.access_token = re_access_token;
-          console.log("어세스토큰 재발급됨");
-          res.send({ isLogin: true });
+          const user = await User.findOne({
+            where: { user_id },
+          });
+          res.send({ isLogin: true, re_access_token, user });
         }
       });
     } else {
+      const user = await User.findOne({
+        where: { user_id },
+      });
       console.log("어세스토큰 살아있음");
-      res.send({ isLogin: true });
+      res.send({ isLogin: true, user });
     }
   });
 });

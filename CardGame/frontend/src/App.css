@@ -24,45 +24,13 @@
 .Header {
   animation: intro 2s;
 }
+.ShopSlide {
+  /* animation: evenSlide 5s linear;
+  animation-iteration-count: infinite; */
+}
 .ShopSlide.active {
   background: rgba(255, 255, 255, 0.3);
   cursor: grabbing;
   cursor: -webkit-grabbing;
   transform: scale(1);
-}
-.ShopAnimation:nth-child(even) {
-  animation: evenSlide 5s linear;
-  animation-iteration-count: infinite;
-}
-.ShopAnimation:nth-child(odd) {
-  animation: oddSlide 5s linear;
-  animation-iteration-count: infinite;
-}
-@keyframes evenSlide {
-  0% {
-    transform: translateX(0%) scaleX(1.31) rotateY(40deg);
-  }
-  25% {
-    transform: translateX(30%) scaleX(1.31) rotateY(40deg);
-  }
-  75% {
-    transform: translateX(-200%) scaleX(1.31) rotateY(40deg);
-  }
-  100% {
-    transform: translateX(0%) scaleX(1.31) rotateY(40deg);
-  }
-}
-@keyframes oddSlide {
-  0% {
-    transform: translateX(0%) scaleX(1.31) rotateY(-40deg);
-  }
-  25% {
-    transform: translateX(30%) scaleX(1.31) rotateY(-40deg);
-  }
-  75% {
-    transform: translateX(-200%) scaleX(1.31) rotateY(-40deg);
-  }
-  100% {
-    transform: translateX(0%) scaleX(1.31) rotateY(-40deg);
-  }
 }

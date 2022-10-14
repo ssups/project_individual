@@ -1,14 +1,21 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Whole, Wrap, Logo, Menu, MenuLi, User, UserContents } from "./style";
 
 const Header = ({ setOnLoad }) => {
+  const dispatch = useDispatch();
   const nav = useNavigate();
   const userNick = useSelector(state => state.loginReducer.nickName);
   function move(path) {
     setOnLoad(true);
     nav(`${path}`);
+  }
+  function logout() {
+    sessionStorage.clear();
+    dispatch({ type: "LOGOUT" });
+    setOnLoad(true);
+    // nav("/");
   }
   return (
     <div className="Header">
@@ -25,12 +32,12 @@ const Header = ({ setOnLoad }) => {
             <MenuLi>메뉴3</MenuLi>
           </Menu>
           <User>
-            <UserContents data-path="/login" onClick={e => move(e.target.dataset.path)}>
-              마이페이지
+            <UserContents data-path="/mypage" onClick={e => move(e.target.dataset.path)}>
+              {userNick}의 마이페이지
             </UserContents>
             /
-            <UserContents data-path="/join" onClick={e => move(e.target.dataset.path)}>
-              {userNick}
+            <UserContents data-path="/logout" onClick={logout}>
+              로그아웃
             </UserContents>
           </User>
         </Wrap>

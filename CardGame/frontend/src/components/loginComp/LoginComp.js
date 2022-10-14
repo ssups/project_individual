@@ -5,12 +5,13 @@ import { useDispatch } from "react-redux";
 import { loginAction } from "../../redux/middleware";
 import { useNavigate } from "react-router-dom";
 
-const LoginComp = ({ setSwitched, setOnLoad, setIsLoginPage }) => {
+const LoginComp = ({ setOnLoad, setSwitched, setIsLoginPage }) => {
   const inputs = useRef();
   const dispatch = useDispatch();
   const nav = useNavigate();
   function move() {
     setOnLoad(true);
+    // dispatch({ type: "ON_LOAD" });
     setIsLoginPage(false);
     nav("/main");
   }

@@ -32,7 +32,6 @@ app.use(
     secret: process.env.SESSION_KEY,
     resave: false,
     saveUninitialized: true,
-
     // store: new FileStore(),
     // cookie: {
     //   domain: "localhost",
