@@ -1,7 +1,7 @@
 import "./App.css";
 import { Header } from "./components";
 import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
-import { Login, Loading, Main, Shop } from "./pages";
+import { Login, Loading, Main, Shop, MyPage } from "./pages";
 import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "./redux/middleware";
@@ -71,6 +71,10 @@ function App() {
             element={onLoad ? <Loading /> : <LoginCheck component={<Shop />} />}
           />
           {/* <Route path="/loading" element={<Loading />} /> */}
+          <Route
+            path="/mypage"
+            element={onLoad ? <Loading /> : <LoginCheck component={<MyPage />} />}
+          />
         </Routes>
       </div>
     </div>

@@ -7,12 +7,17 @@ import { useDispatch } from "react-redux";
 const Shop = () => {
   const slide = useRef();
   const interval = useRef();
-  const [popUp, setPopup] = useState(false);
-  let [speed, setSpeed] = useState(3);
+  const [popUp, setPopUp] = useState(false);
+  const [speed, setSpeed] = useState(3);
+  const [onGrab, setOnGrab] = useState(false);
+  const [isDown, setIsDown] = useState(false);
+  const [startX, setStartX] = useState(null);
+  const [walk, setWalk] = useState(null);
+  const [scrollLeft, setScrollLeft] = useState(null);
 
   function moveSlide() {
     interval.current = setInterval(() => {
-      console.log("인터벌 실행중");
+      // console.log("인터벌 실행중");
       // slide.current 값이 늦게들어올때가 있어서 조건문으로 오류 방지
       if (slide.current) {
         slide.current.scrollLeft += speed;
@@ -35,48 +40,46 @@ const Shop = () => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [speed]);
-  let isDown = false;
-  let startX;
-  let scrollLeft;
-  let walk;
+
   function onMouseDown(e) {
-    walk = 0;
-    isDown = true;
-    slide.current.classList.add("active");
+    setWalk(0);
+    setIsDown(true);
     // e.pageX -> 이벤트 내에서의 마우스 x좌표
-    startX = e.pageX - slide.current.offsetLeft;
-    scrollLeft = slide.current.scrollLeft;
+    setStartX(e.pageX - slide.current.offsetLeft);
+    setOnGrab(true);
+    setScrollLeft(slide.current.scrollLeft);
     clearInterval(interval.current);
   }
   function onMouseMove(e) {
     if (!isDown) return;
     e.preventDefault();
     const currentX = e.pageX - slide.current.offsetLeft;
-    walk = (currentX - startX) * 3;
+    setWalk((currentX - startX) * 3);
     slide.current.scrollLeft = scrollLeft - walk;
   }
   function onMouseUp() {
     if (walk === 0) {
       console.log("여기서 클릭이벤트 실행하면됨");
-      setPopup(true);
+      setPopUp(true);
     }
-    isDown = false;
-    slide.current.classList.remove("active");
+    setIsDown(false);
+    setOnGrab(false);
     clearInterval(interval.current);
     moveSlide();
   }
   function onMouseLeave() {
-    isDown = false;
-    slide.current.classList.remove("active");
+    setIsDown(false);
+    setOnGrab(false);
     clearInterval(interval.current);
     moveSlide();
   }
   return (
     <Whole className="contents">
-      {popUp ? <PopUp setPopup={setPopup} /> : null}
+      {popUp ? <PopUp setPopUp={setPopUp} /> : null}
       <Wrap>
         <Items
-          className="ShopSlide"
+          className={onGrab ? "ShopSlide active" : "ShopSlide"}
+          // classToggle={onGrab}
           ref={slide}
           onMouseDown={onMouseDown}
           onMouseUp={onMouseUp}

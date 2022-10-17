@@ -9,6 +9,7 @@ const Login = ({ setIsLoginPage, setOnLoad }) => {
   const [switched, setSwitched] = useState(false);
   useEffect(() => {
     setIsLoginPage(true);
+    // 해당 컴포넌트 언마운트때 실행
     return () => {
       setIsLoginPage(false);
     };

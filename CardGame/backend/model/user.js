@@ -18,7 +18,7 @@ class User extends Sequelize.Model {
           allowNull: false,
         },
         cards: {
-          type: Sequelize.STRING,
+          type: Sequelize.TEXT,
           allowNull: true,
         },
         login: {

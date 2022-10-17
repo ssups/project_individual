@@ -1,5 +1,4 @@
 import styled from "styled-components";
-const randNum = Math.floor(Math.random() * 36 + 1) * 10;
 
 const Whole = styled.div`
   display: flex;
@@ -32,6 +31,12 @@ const Items = styled.div`
   ::-webkit-scrollbar {
     display: none;
   }
+  &.active {
+    background: rgba(255, 255, 255, 0.3);
+    cursor: grabbing;
+    cursor: -webkit-grabbing;
+    transform: scale(1);
+  }
 `;
 const Item = styled.div`
   width: 300px;
@@ -56,20 +61,5 @@ const Item = styled.div`
   }
   /* transform: translateX(0); */
 `;
-// const PopUpWrap = styled.div`
-//   position: absolute;
-//   background-color: rgba(0, 0, 0, 0.3);
-//   width: 100%;
-//   height: calc(100vh - 100px);
-//   z-index: 999;
-// `;
-// const PopUp = styled.div`
-//   background-color: black;
-//   width: 500px;
-//   height: 500px;
-//   position: absolute;
-//   left: 50%;
-//   top: 50%;
-//   transform: translate(-50%, -50%);
-// `;
+
 export { Whole, Wrap, Items, Item };
