@@ -1,34 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Wrap, Inventory, Item } from "./style";
+import { Wrap, Inventory, InventoryWrap, Item } from "./style";
+import { Card } from "../../components";
 import { PopUp, PopUP } from "../../components";
-import { itemAction } from "../../redux/middleware";
+import { itemAction, userAction } from "../../redux/middleware";
 
 const MyPage = () => {
   const userId = useSelector(state => state.loginReducer.id);
+  // const userId = sessionStorage.getItem("user_id");
   const cards = useSelector(state => state.cardReducer);
+  const items = useSelector(state => state.itemReducer);
+  const [speed, setSpeed] = useState(3);
   const dispatch = useDispatch();
-  // console.log(cards.userId);
-  console.log(userId);
+  const slide = useRef();
+  const interval = useRef();
   const [popUp, setPopUp] = useState(false);
   const [popUpSvg, setPopUpSvg] = useState(null);
-  // useEffect(() => {
-  //   const { id, nickName, cards } = user;
-  //   console.log(id);
-  // }, [user]);
-  useEffect(() => {
-    dispatch(itemAction.getUserCards(userId));
-  }, []);
-  useEffect(() => {
-    console.log(cards);
-    console.log(cards["userId"]);
-    console.log(cards.userId);
-    console.log(userId);
-    console.log(cards.admin);
-    console.log(cards["admin"]);
-    // console.log(cards[`${userId}`]);
-  }, [cards]);
-
   const svg = {
     cardPack: (
       <svg data-item="cardPack" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
@@ -47,7 +34,43 @@ const MyPage = () => {
       </svg>
     ),
   };
+  useEffect(() => {
+    console.log(items);
+  }, [items]);
+  useEffect(() => {
+    dispatch(userAction.getUserCards(userId));
+    // 밑에 아이템 가져오는거는 알림때 필요해서 header에서 실행시킴
+    // dispatch(userAction.getUserItems(userId));
+  }, []);
+  useEffect(() => {
+    clearInterval(interval.current);
+    moveSlide();
+    return () => clearInterval(interval.current);
+  }, [speed]);
 
+  function moveSlide() {
+    interval.current = setInterval(() => {
+      if (slide.current) {
+        slide.current.scrollLeft += speed;
+        if (
+          slide.current.scrollLeft >=
+          slide.current.scrollWidth - slide.current.offsetWidth - 10
+        ) {
+          setSpeed(-3);
+        }
+        if (slide.current.scrollLeft < 5) {
+          setSpeed(+3);
+        }
+      }
+    }, 20);
+  }
+  function play() {
+    clearInterval(interval.current);
+    moveSlide();
+  }
+  function stop() {
+    clearInterval(interval.current);
+  }
   function showItem(e) {
     // console.log(e.target.dataset.item);
     setPopUp(true);
@@ -60,17 +83,32 @@ const MyPage = () => {
       <Wrap>
         인벤토리
         <Inventory>
-          <Item onClick={showItem} data-item="cardPack">
-            {svg.cardPack}
-            <span data-item="cardPack">기본 카드팩</span>
-          </Item>
-          <Item onClick={showItem} data-item="point">
-            {svg.point}
-            <span data-item="point">추가 포인트</span>
-          </Item>
+          <InventoryWrap>
+            {items.card_pack_basic > 0 ? (
+              <Item onClick={showItem} data-item="cardPack">
+                {svg.cardPack}
+                <span data-item="cardPack">기본 카드팩 X {items.card_pack_basic}</span>
+              </Item>
+            ) : null}
+            {items.point_5000 > 0 ? (
+              <Item onClick={showItem} data-item="point">
+                {svg.point}
+                <span data-item="point">포인트팩(5,000) X {items.point_5000}</span>
+              </Item>
+            ) : null}
+          </InventoryWrap>
         </Inventory>
-        카드덱
-        <Inventory></Inventory>
+        카드덱 <button onClick={play}>재생</button>
+        <button onClick={stop}>정지</button>
+        <Inventory>
+          <InventoryWrap ref={slide}>
+            {cards[userId]
+              ? cards[userId]
+                  .sort((a, b) => b.average - a.average)
+                  .map((el, ind) => <Card data={el} key={ind} />)
+              : null}
+          </InventoryWrap>
+        </Inventory>
       </Wrap>
     </div>
   );

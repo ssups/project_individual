@@ -4,7 +4,7 @@ import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import { Login, Loading, Main, Shop, MyPage } from "./pages";
 import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAction } from "./redux/middleware";
+import { loginAction, itemAction } from "./redux/middleware";
 
 const LoginCheck = ({ component }) => {
   const dispatch = useDispatch();
@@ -27,6 +27,7 @@ function App() {
   const dispatch = useDispatch();
   // const isLogin = useSelector(state => state.loginReducer.isLogin);
   const isLogin = sessionStorage.getItem("isLogin") || false;
+  // const userId = useSelector(state => state.loginReducer.id);
 
   useEffect(() => {
     // 로그인 한적 있을때만 로그인첵 실행되도록
@@ -35,6 +36,7 @@ function App() {
       dispatch(loginAction.loginCheck());
     }
     setOnLoad(true);
+    // dispatch(itemAction.getUserCards(userId));
   }, []);
   useEffect(() => {
     if (onLoad === true) {

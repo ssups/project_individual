@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User } = require("../model");
+const { User, Inventory } = require("../model");
 const bcrypt = require("bcrypt");
 
 router.post("/join", async (req, res) => {
@@ -18,7 +18,15 @@ router.post("/join", async (req, res) => {
         user_id: id,
         nick_name: nickName,
         user_pw: encrypted,
-      }).then(() => res.send({ success: true, msg: "가입 완료" }));
+      })
+        .then(() =>
+          Inventory.create({
+            user_id: id,
+            card_pack_basic: 2,
+            point_5000: 1,
+          })
+        )
+        .then(() => res.send({ success: true, msg: "가입 완료" }));
     });
   }
 });

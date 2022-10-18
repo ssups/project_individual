@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Whole, Wrap, Logo, Menu, MenuLi, MenuImg, User, UserContents } from "./style";
+import {
+  Whole,
+  Wrap,
+  Logo,
+  Menu,
+  MenuLi,
+  MenuImg,
+  User,
+  UserContents,
+  Alarm,
+  AlarmNum,
+} from "./style";
+import { userAction } from "../../redux/middleware";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBell } from "@fortawesome/free-regular-svg-icons";
 import {
   logo,
   flower_greyblue,
@@ -14,7 +28,13 @@ import {
 const Header = ({ setOnLoad }) => {
   const dispatch = useDispatch();
   const nav = useNavigate();
-  const userNick = useSelector(state => state.loginReducer.nickName);
+  const userId = useSelector(state => state.loginReducer.id);
+  const items = useSelector(state => state.itemReducer);
+  const itemsAmount = Object.values(items).reduce((acc, cur) => {
+    let numCur = 0;
+    if (typeof cur === "number") numCur = cur;
+    return acc + numCur;
+  }, 0);
   function move(path) {
     setOnLoad(true);
     nav(`${path}`);
@@ -25,6 +45,9 @@ const Header = ({ setOnLoad }) => {
     setOnLoad(true);
     // nav("/");
   }
+  useEffect(() => {
+    if (userId) dispatch(userAction.getUserItems(userId));
+  }, []);
   return (
     <div className="Header">
       <Whole>
@@ -57,9 +80,14 @@ const Header = ({ setOnLoad }) => {
             </MenuLi>
           </Menu>
           <User>
-            <UserContents data-path="/mypage" onClick={e => move(e.target.dataset.path)}>
-              {/* {userNick}의 마이페이지 */}
+            <UserContents data-path="/mypage" onClick={e => move(e.currentTarget.dataset.path)}>
               마이페이지
+              {itemsAmount ? (
+                <Alarm>
+                  <FontAwesomeIcon icon={faBell} />
+                  <AlarmNum>{itemsAmount}</AlarmNum>
+                </Alarm>
+              ) : null}
             </UserContents>
             /
             <UserContents data-path="/logout" onClick={logout}>

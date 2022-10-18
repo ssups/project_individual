@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 const Wrap = styled.div`
-  width: 1600px;
+  width: 90%;
+  min-width: 1100px;
   margin: auto;
   padding-top: 20px;
 `;

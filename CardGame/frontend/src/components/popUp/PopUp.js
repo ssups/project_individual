@@ -17,7 +17,7 @@ const PopUp = ({ setPopUp, popUpSvg }) => {
     switch (e.target.parentNode.children[0].dataset.item) {
       case "cardPack":
         console.log("카드팩");
-        dispatch(itemAction.openCardPack(loginUserId));
+        dispatch(itemAction.openCardPack(loginUserId, setPopUp));
 
         break;
 

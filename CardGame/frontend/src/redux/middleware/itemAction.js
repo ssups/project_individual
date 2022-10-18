@@ -1,26 +1,18 @@
 import axios from "axios";
+import { userAction } from "./userAction";
 
-function openCardPack(id, amount) {
+function openCardPack(id, setPopUp) {
   return async (dispatch, state) => {
     const { data: response } = await axios({
       method: "post",
       url: "http://localhost:4000/open_card_pack",
       data: { id },
     });
-    // console.log(response);
-    // dispatch()
-  };
-}
-function getUserCards(id) {
-  return async (dispatch, state) => {
-    const { data: response } = await axios({
-      method: "post",
-      url: "http://localhost:4000/get_user_cards",
-      data: { id },
-    });
-    console.log(response);
-    dispatch({ type: "GET_USER_CARDS", payload: { id, data: response } });
+    alert(response);
+    dispatch(userAction.getUserCards(id));
+    dispatch(userAction.getUserItems(id));
+    setPopUp(false);
   };
 }
 
-export const itemAction = { openCardPack, getUserCards };
+export const itemAction = { openCardPack };

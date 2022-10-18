@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const Whole = styled.div`
   position: fixed;
@@ -8,7 +8,8 @@ const Whole = styled.div`
   background-color: white;
 `;
 const Wrap = styled.div`
-  width: 1600px;
+  width: 90%;
+  min-width: 1100px;
   height: 100%;
   margin: auto;
   display: flex;
@@ -68,6 +69,8 @@ const User = styled.div`
   /* background-color: yellow; */
 `;
 const UserContents = styled.span`
+  display: flex;
+  align-items: center;
   cursor: pointer;
   :first-child {
     margin-right: 10px;
@@ -79,4 +82,34 @@ const UserContents = styled.span`
     transform: scale(1.2);
   }
 `;
-export { Whole, Wrap, Logo, Menu, MenuLi, MenuImg, User, UserContents };
+const alarmMotion = keyframes`
+  25%{
+    transform: rotate(-20deg);
+  }
+  75%{
+    transform: rotate(20deg);
+  }
+`;
+const Alarm = styled.div`
+  margin-left: 5px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  color: red;
+  & > svg {
+    height: 35px;
+    animation: ${alarmMotion} 1s infinite linear;
+    /* animation-timing-function: linear; */
+  }
+  /* :hover {
+    transform: scale(1.1);
+  } */
+`;
+const AlarmNum = styled.span`
+  font-size: 20px;
+  position: absolute;
+  right: 10px;
+`;
+export { Whole, Wrap, Logo, Menu, MenuLi, MenuImg, User, UserContents, Alarm, AlarmNum };

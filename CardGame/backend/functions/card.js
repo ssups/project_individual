@@ -1,9 +1,9 @@
 function Card() {
-  this.attack = Math.floor(Math.random() * 45) + 1;
-  this.def = Math.floor(Math.random() * 45) + 1;
+  this.attack = Math.floor(Math.random() * 30) + 1;
+  this.def = Math.floor(Math.random() * 30) + 1;
   this.average = (this.attack + this.def) / 2;
   this.rarity =
-    this.average >= 40 ? "UltraRare" : this.average < 40 && this.average >= 20 ? "Rare" : "Normal";
+    this.average >= 25 ? "UltraRare" : this.average < 25 && this.average >= 15 ? "Rare" : "Normal";
 }
 
 module.exports = Card;

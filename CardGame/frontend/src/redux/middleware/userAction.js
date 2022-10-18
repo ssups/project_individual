@@ -17,4 +17,26 @@ function join(id, nickName, pw, setSwitched) {
   };
 }
 
-export const userAction = { join };
+function getUserCards(id) {
+  return async (dispatch, state) => {
+    const { data: response } = await axios({
+      method: "post",
+      url: "http://localhost:4000/get_user_cards",
+      data: { id },
+    });
+    if (response) dispatch({ type: "GET_USER_CARDS", payload: { id, data: response } });
+  };
+}
+
+function getUserItems(id) {
+  return async (dispatch, state) => {
+    const { data: response } = await axios({
+      method: "post",
+      url: "http://localhost:4000/get_user_items",
+      data: { id },
+    });
+    if (response) dispatch({ type: "GET_USER_ITEMS", payload: response });
+  };
+}
+
+export const userAction = { join, getUserCards, getUserItems };

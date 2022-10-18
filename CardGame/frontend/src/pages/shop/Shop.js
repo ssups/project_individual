@@ -33,6 +33,7 @@ const Shop = () => {
   }
 
   useEffect(() => {
+    clearInterval(interval.current);
     moveSlide();
     // 언마운트때 클리어인터벌 해주기
     return () => {

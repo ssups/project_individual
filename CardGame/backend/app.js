@@ -45,7 +45,8 @@ app.use(
 );
 
 // 라우터
-const { user, login, card } = require("./routers");
+const { user, login, card, item } = require("./routers");
 app.use(user);
 app.use(login);
 app.use(card);
+app.use(item);
