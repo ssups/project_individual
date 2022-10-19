@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Wrap = styled.div`
   width: 90%;
-  min-width: 1100px;
+  min-width: 1250px;
   margin: auto;
   padding-top: 20px;
   font-size: 25px;
@@ -24,6 +24,7 @@ const InventoryWrap = styled.div`
   margin: auto;
   min-width: 900px;
   height: 100%;
+  /* flexbox하면 자식요소의 너비값 그대로 유지되면서 inline 으로 배치됨 */
   display: flexbox;
   align-items: center;
   padding: 30px 0 30px 0;

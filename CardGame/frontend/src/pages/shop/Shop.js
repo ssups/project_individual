@@ -3,6 +3,7 @@ import { Whole, Wrap, Items, Item } from "./style";
 import { PopUp } from "../../components";
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import svg from "../../icons/svgs";
 
 const Shop = () => {
   const slide = useRef();
@@ -14,6 +15,8 @@ const Shop = () => {
   const [startX, setStartX] = useState(null);
   const [walk, setWalk] = useState(null);
   const [scrollLeft, setScrollLeft] = useState(null);
+  const [purpose, setPurpose] = useState(null);
+  const [popUpSvg, setPopUpSvg] = useState(null);
 
   function moveSlide() {
     interval.current = setInterval(() => {
@@ -58,25 +61,42 @@ const Shop = () => {
     setWalk((currentX - startX) * 3);
     slide.current.scrollLeft = scrollLeft - walk;
   }
-  function onMouseUp() {
-    if (walk === 0) {
-      console.log("여기서 클릭이벤트 실행하면됨");
-      setPopUp(true);
-    }
+  function onMouseUp(e) {
     setIsDown(false);
     setOnGrab(false);
+  }
+  function onMouseLeave() {
+    // 팝업창 열려버리면 onMouseLeave로 인식하므로
+    // 팝업창 꺼져있을때만 활성화
+    if (!popUp) {
+      setIsDown(false);
+      setOnGrab(false);
+      clearInterval(interval.current);
+      moveSlide();
+    }
+  }
+  function play() {
     clearInterval(interval.current);
     moveSlide();
   }
-  function onMouseLeave() {
-    setIsDown(false);
-    setOnGrab(false);
+  function stop() {
     clearInterval(interval.current);
-    moveSlide();
+  }
+  function showItem(e) {
+    if (walk === 0) {
+      console.log(e.currentTarget.dataset.item);
+      setPurpose("shop");
+      setPopUp(true);
+      setPopUpSvg(svg[e.currentTarget.dataset.item]);
+      stop();
+      setPopUp(true);
+    }
   }
   return (
     <Whole className="contents">
-      {popUp ? <PopUp setPopUp={setPopUp} /> : null}
+      {popUp ? (
+        <PopUp setPopUp={setPopUp} play={play} purpose={purpose} popUpSvg={popUpSvg} />
+      ) : null}
       <Wrap>
         <Items
           className={onGrab ? "ShopSlide active" : "ShopSlide"}
@@ -87,21 +107,23 @@ const Shop = () => {
           onMouseMove={onMouseMove}
           onMouseLeave={onMouseLeave}
         >
-          {/* <div style={{ perspective: "1500px" }}> */}
-          <Item style={{ backgroundColor: "white" }}></Item>
-          <Item style={{ backgroundColor: "white" }}></Item>
-          <Item style={{ backgroundColor: "white" }}></Item>
-          <Item style={{ backgroundColor: "white" }}></Item>
-          <Item style={{ backgroundColor: "white" }}></Item>
-          <Item style={{ backgroundColor: "white" }}></Item>
-          <Item style={{ backgroundColor: "white" }}></Item>
-          <Item style={{ backgroundColor: "white" }}></Item>
-          <Item style={{ backgroundColor: "white" }}></Item>
-          <Item style={{ backgroundColor: "white" }}></Item>
-          <Item style={{ backgroundColor: "white" }}></Item>
-          <Item style={{ backgroundColor: "white" }}></Item>
-          {/* <Item style={{ backgroundColor: "white" }}></Item> */}
-          {/* </div> */}
+          <Item onClick={showItem} data-item="cardPack">
+            {svg.cardPack}기본팩
+          </Item>
+          <Item onClick={showItem} data-item="point_5000">
+            {svg.point_5000}5,000 포인트팩
+          </Item>
+          <Item></Item>
+          <Item></Item>
+          <Item></Item>
+          <Item></Item>
+          {/* <Item ></Item> */}
+          {/* <Item ></Item> */}
+          {/* <Item ></Item> */}
+          {/* <Item ></Item> */}
+          {/* <Item ></Item> */}
+          {/* <Item ></Item> */}
+          {/* <Item ></Item> */}
         </Items>
       </Wrap>
     </Whole>

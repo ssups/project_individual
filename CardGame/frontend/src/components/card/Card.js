@@ -1,7 +1,7 @@
 import React from "react";
 import { Wrap, CardDescription, CardImg, CardStatus } from "./style";
 
-const Card = ({ data }) => {
+const Card = ({ data, setPopUp, setPurpose, stop, setCardData }) => {
   const attackColor =
     data.attack >= 25 ? "gold" : data.attack < 25 && data.attack >= 15 ? "silver" : "black";
   const defColor = data.def >= 25 ? "gold" : data.def < 25 && data.def >= 15 ? "silver" : "black";
@@ -9,8 +9,15 @@ const Card = ({ data }) => {
     data.average >= 25 ? "gold" : data.average < 25 && data.average >= 15 ? "silver" : "black";
   const rarityColor =
     data.rarity === "UltraRare" ? "gold" : data.rarity === "Rare" ? "silver" : "black";
+  function showCard(e) {
+    console.log(e.currentTarget);
+    stop();
+    setPurpose("card");
+    setPopUp(true);
+    setCardData(data);
+  }
   return (
-    <Wrap style={{ backgroundColor: averageColor }}>
+    <Wrap style={{ backgroundColor: averageColor }} onClick={showCard}>
       <CardImg></CardImg>
       <CardDescription>
         <div>

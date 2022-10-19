@@ -11,6 +11,7 @@ const Wrap = styled.div`
   padding-top: 50px;
 `;
 const Items = styled.div`
+  display: flexbox;
   height: 400px;
   padding: 30px;
   width: 100%;
@@ -39,17 +40,19 @@ const Items = styled.div`
   }
 `;
 const Item = styled.div`
+  padding: 10px;
   width: 300px;
   height: 340px;
-  display: inline-flex;
+  /* display: inline-flex; */
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: 80px;
-  font-weight: 100;
-  color: rgba(0, 0, 0, 0.15);
+  justify-content: space-around;
+  font-size: 35px;
   /* 테두리 색 */
   /* box-shadow: inset 0 0 0 10px rgba(0, 0, 0, 0.15); */
   box-shadow: inset 0 0 0 10px rgba(0, 0, 0, 0.5);
+  background-color: white;
   :nth-child(even) {
     transform: scaleX(1.31) rotateY(40deg);
   }
@@ -58,6 +61,9 @@ const Item = styled.div`
   }
   :last-child {
     margin-right: 60px;
+  }
+  & > svg {
+    height: 70%;
   }
   /* transform: translateX(0); */
 `;

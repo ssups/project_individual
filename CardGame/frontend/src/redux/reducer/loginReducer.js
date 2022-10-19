@@ -2,16 +2,19 @@ const init = {
   id: null,
   nickName: null,
   cards: null,
-  // isLogin: false,
+  point: null,
+  isLogin: false,
 };
 function reducer(state = init, { type, payload }) {
   switch (type) {
     case "LOGIN":
-      const { user_id: id, nick_name: nickName, cards } = payload;
-      return { id, nickName, cards, isLogin: true };
+      const { user_id: id, nick_name: nickName, cards, point } = payload;
+      return { id, nickName, cards, point, isLogin: true };
 
     case "LOGOUT":
       return { isLogin: false };
+    case "UPDATE_USER_POINT":
+      return { ...state, point: state.point + payload };
 
     default:
       return state;

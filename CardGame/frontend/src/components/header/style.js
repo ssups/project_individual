@@ -9,7 +9,7 @@ const Whole = styled.div`
 `;
 const Wrap = styled.div`
   width: 90%;
-  min-width: 1100px;
+  min-width: 1250px;
   height: 100%;
   margin: auto;
   display: flex;
@@ -61,25 +61,34 @@ const MenuImg = styled.img`
   margin-right: 5px;
 `;
 const User = styled.div`
-  width: max-content;
-  height: 100%;
+  width: 232px;
+  height: 65px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   /* background-color: yellow; */
 `;
 const UserContents = styled.span`
   display: flex;
   align-items: center;
-  cursor: pointer;
   :first-child {
     margin-right: 10px;
+    cursor: pointer;
+    :hover {
+      transform: scale(1.2);
+    }
+  }
+  :nth-child(2) {
+    margin-left: 10px;
+    cursor: pointer;
+    :hover {
+      transform: scale(1.2);
+    }
   }
   :last-child {
-    margin-left: 10px;
-  }
-  :hover {
-    transform: scale(1.2);
+    position: absolute;
+    bottom: 0px;
   }
 `;
 const alarmMotion = keyframes`
@@ -100,16 +109,22 @@ const Alarm = styled.div`
   color: red;
   & > svg {
     height: 35px;
-    animation: ${alarmMotion} 1s infinite linear;
+    /* animation: ${alarmMotion} 1s infinite linear; */
     /* animation-timing-function: linear; */
+  }
+  & > .active {
+    animation: ${alarmMotion} 1s infinite linear;
   }
   /* :hover {
     transform: scale(1.1);
   } */
 `;
 const AlarmNum = styled.span`
-  font-size: 20px;
+  font-size: 15px;
   position: absolute;
-  right: 10px;
+  /* right: 11px; */
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
 `;
 export { Whole, Wrap, Logo, Menu, MenuLi, MenuImg, User, UserContents, Alarm, AlarmNum };

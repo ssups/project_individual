@@ -21,9 +21,10 @@ class User extends Sequelize.Model {
           type: Sequelize.TEXT,
           allowNull: true,
         },
-        login: {
-          type: Sequelize.BOOLEAN,
-          allowNull: true,
+        point: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          defaultValue: 0,
         },
       },
       {

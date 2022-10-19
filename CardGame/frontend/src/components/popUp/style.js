@@ -28,11 +28,25 @@ const Wrap = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  /* background-color: white; */
+  background-color: rgba(255, 255, 255, 0.5);
   & > svg {
     width: 350px;
     height: 350px;
     animation: ${itemMotion} 2s infinite;
+  }
+`;
+const Attribute = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 350px;
+  & > div {
+    font-size: 30px;
+  }
+  & > div > input {
+    font-size: 30px;
+    width: 60px;
+    height: 50px;
   }
 `;
 const Button = styled.button`
@@ -41,5 +55,30 @@ const Button = styled.button`
   font-family: "arirang";
   font-size: 30px;
 `;
+const CardWrap = styled.div`
+  width: 100%;
+  height: 100%;
 
-export { Whole, Wrap, Button };
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+`;
+const CardDescription = styled.div`
+  background-color: white;
+  width: 90%;
+  height: 130px;
+  border: 1px solid black;
+  font-size: 35px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+const CardStatusWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export { Whole, Wrap, Attribute, Button, CardWrap, CardDescription, CardStatusWrap };

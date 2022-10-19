@@ -16,7 +16,7 @@ router.post("/get_user_cards", async (req, res) => {
 });
 
 router.post("/open_card_pack", async (req, res) => {
-  console.log("실행");
+  console.log("카드팩 열기 실행");
   const { id } = req.body;
   const init = await User.findOne({
     where: { user_id: id },

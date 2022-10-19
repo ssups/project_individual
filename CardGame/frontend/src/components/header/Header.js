@@ -28,7 +28,7 @@ import {
 const Header = ({ setOnLoad }) => {
   const dispatch = useDispatch();
   const nav = useNavigate();
-  const userId = useSelector(state => state.loginReducer.id);
+  const userData = useSelector(state => state.loginReducer);
   const items = useSelector(state => state.itemReducer);
   const itemsAmount = Object.values(items).reduce((acc, cur) => {
     let numCur = 0;
@@ -46,7 +46,8 @@ const Header = ({ setOnLoad }) => {
     // nav("/");
   }
   useEffect(() => {
-    if (userId) dispatch(userAction.getUserItems(userId));
+    // 로그아웃했을때 로그인 페이지에서 userId state값을 못받아오는경우의 에러 방지
+    if (userData.id) dispatch(userAction.getUserItems(userData.id));
   }, []);
   return (
     <div className="Header">
@@ -59,7 +60,7 @@ const Header = ({ setOnLoad }) => {
             </div>
           </Logo>
           <Menu>
-            <MenuLi data-path="/shop" onClick={e => move(e.target.dataset.path)}>
+            <MenuLi data-path="/shop" onClick={e => move(e.currentTarget.dataset.path)}>
               <MenuImg src={flower_red} alt="" />
               상점
             </MenuLi>
@@ -82,17 +83,16 @@ const Header = ({ setOnLoad }) => {
           <User>
             <UserContents data-path="/mypage" onClick={e => move(e.currentTarget.dataset.path)}>
               마이페이지
-              {itemsAmount ? (
-                <Alarm>
-                  <FontAwesomeIcon icon={faBell} />
-                  <AlarmNum>{itemsAmount}</AlarmNum>
-                </Alarm>
-              ) : null}
+              <Alarm>
+                <FontAwesomeIcon icon={faBell} className={itemsAmount ? "active" : ""} />
+                <AlarmNum>{itemsAmount}</AlarmNum>
+              </Alarm>
             </UserContents>
             /
             <UserContents data-path="/logout" onClick={logout}>
               로그아웃
             </UserContents>
+            <UserContents style={{ fontSize: "20px" }}>보유 포인트: {userData.point}P</UserContents>
           </User>
         </Wrap>
       </Whole>
