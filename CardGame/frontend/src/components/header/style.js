@@ -17,7 +17,7 @@ const Wrap = styled.div`
   justify-content: space-between;
 `;
 const Logo = styled.div`
-  width: 300px;
+  width: max-content;
   height: 100%;
   display: flex;
   align-items: center;

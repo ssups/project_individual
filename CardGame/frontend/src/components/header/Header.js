@@ -53,11 +53,9 @@ const Header = ({ setOnLoad }) => {
     <div className="Header">
       <Whole>
         <Wrap>
-          <Logo data-path="/main" onClick={e => move(e.target.dataset.path)}>
-            <img data-path="/main" style={{ width: "80px" }} src={logo} alt="" />
-            <div data-path="/main" style={{ width: "120px", textAlign: "center" }}>
-              페이지 이름
-            </div>
+          <Logo data-path="/main" onClick={e => move(e.currentTarget.dataset.path)}>
+            <img style={{ width: "80px" }} src={logo} alt="" />
+            <div style={{ width: "120px", textAlign: "center" }}>페이지 이름</div>
           </Logo>
           <Menu>
             <MenuLi data-path="/shop" onClick={e => move(e.currentTarget.dataset.path)}>
@@ -71,13 +69,13 @@ const Header = ({ setOnLoad }) => {
               <MenuImg src={flower_purple} alt="" />
               카드북
             </MenuLi>
-            <MenuLi>
+            <MenuLi data-path="/public_board" onClick={e => move(e.currentTarget.dataset.path)}>
               <MenuImg src={flower_skyblue} alt="" />
-              공지사항
+              게시판
             </MenuLi>
-            <MenuLi>
+            <MenuLi data-path="/notice_board" onClick={e => move(e.currentTarget.dataset.path)}>
               <MenuImg src={flower_yellow} alt="" />
-              이벤트
+              공지사항
             </MenuLi>
           </Menu>
           <User>
