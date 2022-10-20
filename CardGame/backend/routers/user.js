@@ -4,6 +4,8 @@ const bcrypt = require("bcrypt");
 
 router.post("/join", async (req, res) => {
   const { id, nickName, pw } = await req.body;
+  // 어드민은 기본 포인트 십만
+  const point = id === "admin" ? 100000 : 0;
   const idOverlap = await User.findOne({
     where: { user_id: id },
   });
@@ -18,6 +20,7 @@ router.post("/join", async (req, res) => {
         user_id: id,
         nick_name: nickName,
         user_pw: encrypted,
+        point,
       })
         .then(() =>
           Inventory.create({

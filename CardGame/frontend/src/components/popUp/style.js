@@ -8,12 +8,32 @@ const itemMotion = keyframes`
     transform: scale(1);
   }
 `;
+const popMotion = keyframes`
+  0%{
+    opacity: 0;
+    width: 0;
+    height: 0;
+    color: transparent;
+  }
+  30%{
+    /* transform: translate(-50%, -50%) scale(1) rotate(180deg); */
+    /* opacity: 0.5; */
+    width: 500px;
+    height: 500px;
+  }
+  80%{
+    /* transform: translate(-50%, -50%) scale(1) rotate(360deg); */
+    opacity: 1;
+    
+  }
+`;
 const Whole = styled.div`
   position: absolute;
   background-color: rgba(0, 0, 0, 0.3);
   width: 100%;
   height: calc(100vh - 100px);
   z-index: 999;
+  /* 배경 흐리게 */
   backdrop-filter: blur(5px);
 `;
 const Wrap = styled.div`
@@ -28,7 +48,8 @@ const Wrap = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.75);
+  animation: ${popMotion} 1.5s linear;
   & > svg {
     width: 350px;
     height: 350px;
@@ -58,7 +79,6 @@ const Button = styled.button`
 const CardWrap = styled.div`
   width: 100%;
   height: 100%;
-
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -68,10 +88,10 @@ const CardWrap = styled.div`
 const CardDescription = styled.div`
   background-color: white;
   width: 90%;
-  height: 130px;
+  height: 110px;
   border: 1px solid black;
   font-size: 35px;
-  padding: 15px;
+  padding: 5px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

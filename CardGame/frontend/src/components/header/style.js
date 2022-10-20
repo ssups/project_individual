@@ -106,7 +106,7 @@ const Alarm = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  color: red;
+
   & > svg {
     height: 35px;
     /* animation: ${alarmMotion} 1s infinite linear; */
@@ -114,6 +114,7 @@ const Alarm = styled.div`
   }
   & > .active {
     animation: ${alarmMotion} 1s infinite linear;
+    color: red;
   }
   /* :hover {
     transform: scale(1.1);

@@ -84,6 +84,18 @@ const MyPage = () => {
                 <span>기본 카드팩(5장) X {items.card_pack_basic}</span>
               </Item>
             ) : null}
+            {items.card_pack_rare > 0 ? (
+              <Item onClick={showItem} data-item="cardPack_rare">
+                {svg.cardPack_rare}
+                <span>레어 카드팩(3장) X {items.card_pack_rare}</span>
+              </Item>
+            ) : null}
+            {items.card_pack_ultraRare > 0 ? (
+              <Item onClick={showItem} data-item="cardPack_ultraRare">
+                {svg.cardPack_ultraRare}
+                <span>울레 카드팩(1장) X {items.card_pack_ultraRare}</span>
+              </Item>
+            ) : null}
             {items.point_5000 > 0 ? (
               <Item onClick={showItem} data-item="point_5000">
                 {svg.point_5000}

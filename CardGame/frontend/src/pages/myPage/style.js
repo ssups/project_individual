@@ -39,9 +39,15 @@ const Item = styled.div`
   cursor: pointer;
   height: 250px;
   margin-right: 100px;
+  :hover {
+    transform: scale(1.15);
+  }
+
   & > svg {
     width: 200px;
     height: 200px;
+    /* box-shadow: 15px 15px 5px rgba(0, 0, 0, 0.5); */
+    /* color: red; */
   }
 `;
 

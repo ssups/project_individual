@@ -85,14 +85,16 @@ const Header = ({ setOnLoad }) => {
               마이페이지
               <Alarm>
                 <FontAwesomeIcon icon={faBell} className={itemsAmount ? "active" : ""} />
-                <AlarmNum>{itemsAmount}</AlarmNum>
+                <AlarmNum style={{ color: itemsAmount ? "red" : "" }}>{itemsAmount}</AlarmNum>
               </Alarm>
             </UserContents>
             /
             <UserContents data-path="/logout" onClick={logout}>
               로그아웃
             </UserContents>
-            <UserContents style={{ fontSize: "20px" }}>보유 포인트: {userData.point}P</UserContents>
+            <UserContents style={{ fontSize: "20px" }}>
+              보유 포인트: {userData.point?.toLocaleString()}P
+            </UserContents>
           </User>
         </Wrap>
       </Whole>

@@ -13,9 +13,10 @@ function reducer(state = init, { type, payload }) {
 
     case "LOGOUT":
       return { isLogin: false };
-    case "UPDATE_USER_POINT":
+    case "INCREASE_USER_POINT":
       return { ...state, point: state.point + payload };
-
+    case "DECREASE_USER_POINT":
+      return { ...state, point: state.point - payload };
     default:
       return state;
   }

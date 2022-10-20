@@ -83,7 +83,9 @@ const Shop = () => {
     clearInterval(interval.current);
   }
   function showItem(e) {
+    // 드래그했을때는 발동안하도록 조건검
     if (walk === 0) {
+      // const e.cu
       console.log(e.currentTarget.dataset.item);
       setPurpose("shop");
       setPopUp(true);
@@ -108,12 +110,17 @@ const Shop = () => {
           onMouseLeave={onMouseLeave}
         >
           <Item onClick={showItem} data-item="cardPack">
-            {svg.cardPack}기본팩
+            {svg.cardPack}기본 카드팩(5장)
+          </Item>
+          <Item onClick={showItem} data-item="cardPack_rare">
+            {svg.cardPack_rare}레어 카드팩(3장)
+          </Item>
+          <Item onClick={showItem} data-item="cardPack_ultraRare">
+            {svg.cardPack_ultraRare}울레 카드팩(1장)
           </Item>
           <Item onClick={showItem} data-item="point_5000">
             {svg.point_5000}5,000 포인트팩
           </Item>
-          <Item></Item>
           <Item></Item>
           <Item></Item>
           <Item></Item>
