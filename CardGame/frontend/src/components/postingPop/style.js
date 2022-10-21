@@ -53,14 +53,27 @@ const SubTitle = styled.div`
   flex-direction: row-reverse;
   align-items: center;
 `;
-const TextArea = styled.textarea`
+const ImgArea = styled.img`
+  width: 50%;
+  height: 500px;
+  border: 1px solid black;
+`;
+const TextArea = styled.div`
   width: 100%;
   height: 500px;
-  border-bottom: 1px solid black;
   font-size: 25px;
   font-family: "arirang";
   :focus-visible {
     outline: none;
+  }
+  border: 1px solid black;
+  border-left: none;
+  & .ck.ck-editor__editable:not(.ck-editor__nested-editable) {
+    height: 459px;
+  }
+  & img {
+    /* width: 400px;
+    height: 400px; */
   }
 `;
 const ButtonWrap = styled.div`
@@ -80,4 +93,15 @@ const Button = styled.button`
   }
 `;
 
-export { Whole, Wrap, InnerWrap, Title, InputTitle, SubTitle, TextArea, ButtonWrap, Button };
+export {
+  Whole,
+  Wrap,
+  InnerWrap,
+  Title,
+  InputTitle,
+  SubTitle,
+  TextArea,
+  ButtonWrap,
+  Button,
+  ImgArea,
+};

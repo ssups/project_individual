@@ -7,6 +7,7 @@ import flower_purple from "./flower_purple.png";
 import flower_red from "./flower_red.png";
 import flower_skyblue from "./flower_skyblue.png";
 import flower_yellow from "./flower_yellow.png";
+import default_img from "./default_img.jpeg";
 
 export {
   left_door,
@@ -18,4 +19,5 @@ export {
   flower_red,
   flower_skyblue,
   flower_yellow,
+  default_img,
 };

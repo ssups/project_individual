@@ -6,6 +6,8 @@ const cors = require("cors");
 const session = require("express-session");
 const FileStore = require("session-file-store")(session);
 const dot = require("dotenv");
+const path = require("path");
+
 dot.config();
 
 // 서버열기
@@ -45,8 +47,13 @@ app.use(
 );
 
 // 라우터
-const { user, login, card, item } = require("./routers");
+const { user, login, card, item, image, post } = require("./routers");
 app.use(user);
 app.use(login);
 app.use(card);
 app.use(item);
+app.use(image);
+app.use(post);
+
+// 정적폴더 경로설정
+app.use("/images", express.static(path.join(__dirname, "/images")));
