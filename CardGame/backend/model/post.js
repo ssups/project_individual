@@ -21,6 +21,10 @@ class Post extends Sequelize.Model {
           allowNull: false,
           defaultValue: 0,
         },
+        thumb_nail: {
+          type: Sequelize.TEXT,
+          allowNull: true,
+        },
       },
       {
         sequelize,

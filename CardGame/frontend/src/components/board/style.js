@@ -21,21 +21,27 @@ const Wrap = styled.div`
   height: calc(100vh - 250px);
   border: 2px solid black;
 `;
+const Description = styled.div`
+  width: 90%;
+  height: 50px;
+  margin: auto;
+  border-bottom: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+`;
 const PostsWrap = styled.div`
   width: 100%;
   height: calc(100vh - 300px);
-  border-bottom: 1px solid black;
   display: flex;
   flex-direction: column;
+  /* background-color: red; */
 `;
-const Post = styled.div`
-  width: 100%;
-  height: 100%;
-  border-bottom: 1px solid black;
-`;
+
 const Attributes = styled.div`
   width: 100%;
-  height: 50px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -62,4 +68,4 @@ const Button = styled.button`
   right: 0;
 `;
 
-export { Wrap, Title, Selection, PostsWrap, Attributes, PageNum, Button, Post };
+export { Wrap, Title, Selection, PostsWrap, Description, Attributes, PageNum, Button };

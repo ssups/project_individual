@@ -1,14 +1,26 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
-import { Wrap, Title, Selection, PostsWrap, Post, Attributes, PageNum, Button } from "./style";
+import { useDispatch, useSelector } from "react-redux";
+import { PostList } from "../../components";
+import {
+  Wrap,
+  Title,
+  Selection,
+  PostsWrap,
+  Description,
+  Attributes,
+  PageNum,
+  Button,
+} from "./style";
 
 const Board = ({ name, setIsPosting }) => {
-  const allPosts = useSelector(state => state.postReducer.allPosts);
+  let allPosts = useSelector(state => state.postReducer.allPosts);
   const loginUserId = useSelector(state => state.loginReducer.id);
   const pageNumRef = useRef([]);
   const [amountPerPage, setAmountPerPage] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
+  const [order, setOrder] = useState("latest");
   const postsAmount = name === "게시판" ? allPosts?.length : null;
+  const dispatch = useDispatch();
 
   function onChange(e) {
     setAmountPerPage(e.target.value * 1);
@@ -16,6 +28,15 @@ const Board = ({ name, setIsPosting }) => {
   }
   function pageChange(e) {
     setCurrentPage(e.currentTarget.innerText * 1);
+  }
+  function sortByDate() {
+    if (order === "old") {
+      dispatch({ type: "SORT_POSTS_BY_NEW" });
+      setOrder("latest");
+    } else {
+      dispatch({ type: "SORT_POSTS_BY_OLD" });
+      setOrder("old");
+    }
   }
   useEffect(() => {
     pageNumRef.current.forEach(el => el?.classList.remove("active"));
@@ -30,21 +51,38 @@ const Board = ({ name, setIsPosting }) => {
       <div style={{ height: "30px", position: "relative" }}>
         <Selection name="" id="" onChange={onChange}>
           <option value="4">4</option>
+          <option value="6">6</option>
           <option value="8">8</option>
         </Selection>
       </div>
       <Wrap>
+        <Description>
+          <span style={{ width: "30px" }}></span>
+          <span style={{ width: "60%" }}>제목</span>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <div style={{ width: "100px" }}> 작성자 </div>
+            <div style={{ width: "120px" }} onClick={sortByDate}>
+              작성일 {order === "latest" ? "⇧" : order === "old" ? "⇩" : null}
+            </div>
+            <div style={{ width: "60px" }}> 조회수 </div>
+          </div>
+        </Description>
         {name === "게시판" ? (
           <PostsWrap>
             {Array(amountPerPage)
               .fill(0)
               .map((el, ind) => (
-                <Post key={ind}>{allPosts[ind + (currentPage - 1) * amountPerPage]?.id}</Post>
+                <PostList
+                  key={allPosts[ind + (currentPage - 1) * amountPerPage]?.id || -ind}
+                  data={allPosts[ind + (currentPage - 1) * amountPerPage]}
+                  LiNum={ind + (currentPage - 1) * amountPerPage + 1}
+                  amountPerPage={amountPerPage}
+                />
               ))}
           </PostsWrap>
         ) : null}
         <Attributes>
-          {Array(postsAmount / amountPerPage)
+          {Array(Math.ceil(postsAmount / amountPerPage))
             .fill(0)
             .map((el, ind) => (
               <PageNum key={ind} onClick={pageChange} ref={el => (pageNumRef.current[ind] = el)}>

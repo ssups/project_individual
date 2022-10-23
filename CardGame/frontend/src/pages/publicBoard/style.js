@@ -5,7 +5,6 @@ const Whole = styled.div`
   min-width: 1250px;
   margin: auto;
   height: calc(100vh - 150px);
-  border: 2px solid red;
 `;
 
 export { Whole };

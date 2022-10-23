@@ -5,6 +5,7 @@ const config = {
     database: "react_card_game",
     host: "localhost",
     dialect: "mysql",
+    timezone: "+09:00",
   },
 };
 module.exports = config;

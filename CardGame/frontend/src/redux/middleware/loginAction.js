@@ -9,8 +9,6 @@ function login(id, pw, move) {
     });
     if (response.success) {
       alert(response.msg);
-      // console.log(response);
-      // console.log(response.data);
       sessionStorage.setItem("access_token", response.access_token);
       sessionStorage.setItem("refresh_token", response.refresh_token);
       sessionStorage.setItem("user_id", id);
@@ -22,7 +20,7 @@ function login(id, pw, move) {
 }
 
 function loginCheck() {
-  console.log("로그인 첵 실행");
+  // console.log("로그인 첵 실행");
   const access_token = sessionStorage.getItem("access_token");
   const refresh_token = sessionStorage.getItem("refresh_token");
   const user_id = sessionStorage.getItem("user_id");
@@ -33,7 +31,6 @@ function loginCheck() {
       data: { access_token, refresh_token, user_id },
     });
     if (response.re_access_token) sessionStorage.setItem("access_token", response.re_access_token);
-    console.log(response);
     if (response.isLogin) {
       dispatch({ type: "LOGIN", payload: response.user });
     } else {

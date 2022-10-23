@@ -7,12 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginAction, itemAction } from "./redux/middleware";
 
 const LoginCheck = ({ component }) => {
+  // console.log("로그인첵컴포넌트");
   const dispatch = useDispatch();
   // 페이지 이동시 토큰검사
   dispatch(loginAction.loginCheck());
   const isLogin = sessionStorage.getItem("isLogin") || false;
   // const isLogin = useSelector(state => state.loginReducer.isLogin);
-  console.log("로그인", isLogin);
+  // console.log("로그인", isLogin);
   if (isLogin) return component;
   else
     return (function redirect() {

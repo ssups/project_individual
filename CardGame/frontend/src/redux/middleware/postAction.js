@@ -1,7 +1,6 @@
 import axios from "axios";
 
 function getAllPosts() {
-  console.log("실행됨");
   return async (dispatch, state) => {
     const { data: response } = await axios({
       url: "http://localhost:4000/get_all_posts",

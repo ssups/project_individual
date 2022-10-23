@@ -18,18 +18,20 @@ router.post("/get_user_cards", async (req, res) => {
 router.post("/open_card_pack", async (req, res) => {
   console.log("카드팩 열기 실행");
   const { id } = req.body;
+  console.log(id);
   const init = await User.findOne({
     where: { user_id: id },
     attributes: ["cards"],
     raw: true,
     include: {
       model: Inventory,
-      attributes: ["card_pack_basic"],
+      // attributes: ["card_pack_basic"],
     },
   });
+  console.log(init);
   const initCards = init.cards ? JSON.parse(init.cards) : [];
   const initCardPackBasic = init["Inventories.card_pack_basic"];
-  //   console.log("처음카드", initCards);
+  console.log("처음카드", initCards);
   const newCards = Array(5)
     .fill(0)
     .map(el => new Card());

@@ -42,8 +42,6 @@ class User extends Sequelize.Model {
       foreignKey: "user_id",
       sourceKey: "user_id",
     });
-  }
-  static associate(db) {
     db.User.hasMany(db.Post, {
       foreignKey: "user_id",
       sourceKey: "user_id",
