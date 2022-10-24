@@ -2,9 +2,8 @@ import React from "react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import axios from "axios";
-import { useRef } from "react";
 
-const Editor = ({ setPostData }) => {
+const Editor = ({ setPostData, mode, data, setModifyData }) => {
   const customUploadAdapter = loader => {
     return {
       upload() {
@@ -39,9 +38,10 @@ const Editor = ({ setPostData }) => {
       config={{
         extraPlugins: [uploadPlugin],
       }}
+      data={mode === "modify" ? data : null}
       onChange={(e, editor) => {
         const data = editor.getData();
-        setPostData(data);
+        mode === "modify" ? setModifyData(data) : setPostData(data);
         console.log(data);
       }}
     />

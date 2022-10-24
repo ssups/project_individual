@@ -46,6 +46,10 @@ class User extends Sequelize.Model {
       foreignKey: "user_id",
       sourceKey: "user_id",
     });
+    db.User.hasMany(db.Comment, {
+      foreignKey: "writer",
+      sourceKey: "user_id",
+    });
   }
 }
 

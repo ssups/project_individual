@@ -1,5 +1,6 @@
 import React from "react";
 import { Wrap, CardDescription, CardImg, CardStatus } from "./style";
+import { cards } from "../../images";
 
 const Card = ({ data, setPopUp, setPurpose, stop, setCardData }) => {
   const attackColor =
@@ -18,7 +19,8 @@ const Card = ({ data, setPopUp, setPurpose, stop, setCardData }) => {
   }
   return (
     <Wrap style={{ backgroundColor: averageColor }} onClick={showCard}>
-      <CardImg></CardImg>
+      <CardImg src={cards[data.img]}></CardImg>
+      {/* <CardImg src="../../images/left_door.png"></CardImg> */}
       <CardDescription>
         <div>
           공격력:<span style={{ color: attackColor }}>{data.attack}</span>

@@ -15,7 +15,7 @@ import Editor from "../editor/Editor";
 import { postAction } from "../../redux/middleware";
 // import { CKEditor } from "@ckeditor/ckeditor5-react";
 
-const PostingPop = ({ setIsPosting }) => {
+const PostingPop = ({ setIsPosting, setOrder }) => {
   const dispatch = useDispatch();
   const writer = useSelector(state => state.loginReducer.id);
   const tittleRef = useRef();
@@ -25,10 +25,12 @@ const PostingPop = ({ setIsPosting }) => {
     if (e.target.dataset.for === "backGround") setIsPosting(false);
   }
   function register() {
-    // setPostData(current => {
-    //   return { ...current, title: tittleRef.current.value };
-    // });
-    dispatch(postAction.registerPost(writer, tittleRef.current.value, postData, setIsPosting));
+    const titleVal = tittleRef.current.value;
+    if (titleVal === "" || undefined) {
+      alert("제목을 적어주세요");
+      return;
+    }
+    dispatch(postAction.registerPost(writer, titleVal, postData, setIsPosting, setOrder));
   }
 
   return (

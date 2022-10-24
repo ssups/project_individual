@@ -1,14 +1,25 @@
 import React from "react";
 import { List, ThumbNail, Title } from "./style";
 import parser from "html-react-parser";
+import { useDispatch, useSelector } from "react-redux";
+import { commetAction, postAction } from "../../redux/middleware";
 
-const PostList = ({ data, LiNum, amountPerPage }) => {
+const PostList = ({ data, LiNum, amountPerPage, setIsPostPop }) => {
+  const dispatch = useDispatch();
+  const loginUser = useSelector(state => state.loginReducer.id);
   const Html = <>parser(data?.main)</>;
-  const time = new Date(data?.createdAt);
+  const time = new Date(data?.updatedAt);
   // 달이 좀 이상함;
   const month = time.getMonth() + 1;
   function showPost() {
-    console.log("하이");
+    dispatch({ type: "SET_POP_UP_POST_DATA", payload: data });
+    if (data.user_id !== loginUser) {
+      data.visited++;
+      dispatch(postAction.increaseVisited(data.id));
+      dispatch(commetAction.getComments(data.id));
+    }
+
+    setIsPostPop(true);
   }
 
   return (
@@ -30,7 +41,7 @@ const PostList = ({ data, LiNum, amountPerPage }) => {
               <div>{time.getFullYear() + "-" + month + "-" + time.getDate()}</div>
               <div>{time.getHours() + ":" + time.getMinutes()}</div>
             </div>
-            <div style={{ width: "60px" }}> {data.visited} </div>
+            <div style={{ width: "120px" }}> {data.visited} </div>
           </div>
         </List>
       ) : (

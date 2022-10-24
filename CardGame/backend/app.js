@@ -47,13 +47,14 @@ app.use(
 );
 
 // 라우터
-const { user, login, card, item, image, post } = require("./routers");
+const { user, login, card, item, image, post, comment } = require("./routers");
 app.use(user);
 app.use(login);
 app.use(card);
 app.use(item);
 app.use(image);
 app.use(post);
+app.use(comment);
 
 // 정적폴더 경로설정
 app.use("/images", express.static(path.join(__dirname, "/images")));

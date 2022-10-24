@@ -3,6 +3,7 @@ import { Whole, Wrap, Attribute, Button, CardWrap, CardDescription, CardStatusWr
 import { itemAction } from "../../redux/middleware/itemAction";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { cards } from "../../images";
 
 const PopUp = ({ purpose, setPopUp, popUpSvg, play, cardData }) => {
   const location = useLocation();
@@ -157,8 +158,8 @@ const PopUp = ({ purpose, setPopUp, popUpSvg, play, cardData }) => {
         ) : null}
         {purpose === "card" ? (
           <CardWrap style={{ backgroundColor: averageColor, width: "100%", height: "100%" }}>
-            <div
-              src=""
+            <img
+              src={cards[cardData.img]}
               alt=""
               style={{
                 width: "90%",
@@ -166,7 +167,7 @@ const PopUp = ({ purpose, setPopUp, popUpSvg, play, cardData }) => {
                 border: "1px solid black",
                 backgroundColor: "white",
               }}
-            ></div>
+            ></img>
             <CardDescription>
               <CardStatusWrap>
                 <span>

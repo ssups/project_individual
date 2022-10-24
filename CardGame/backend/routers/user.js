@@ -12,8 +12,14 @@ router.post("/join", async (req, res) => {
   const nickOverlap = await User.findOne({
     where: { nick_name: nickName },
   });
-  if (idOverlap) res.send({ success: false, msg: "아이디 중복" });
-  if (nickOverlap) res.send({ success: false, msg: "닉네임 중복" });
+  if (idOverlap) {
+    res.send({ success: false, msg: "아이디 중복" });
+    return;
+  }
+  if (nickOverlap) {
+    res.send({ success: false, msg: "닉네임 중복" });
+    return;
+  }
   if (!idOverlap && !nickOverlap) {
     bcrypt.hash(pw, 10, (err, encrypted) => {
       User.create({

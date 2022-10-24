@@ -41,6 +41,10 @@ class Post extends Sequelize.Model {
       foreignKey: "user_id",
       targetKey: "user_id",
     });
+    db.Post.hasMany(db.Comment, {
+      foreignKey: "post_id",
+      sourceKey: "id",
+    });
   }
 }
 

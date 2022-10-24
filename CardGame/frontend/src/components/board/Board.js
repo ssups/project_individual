@@ -11,16 +11,19 @@ import {
   PageNum,
   Button,
 } from "./style";
-
-const Board = ({ name, setIsPosting }) => {
+import { postAction } from "../../redux/middleware";
+const Board = ({ name, setIsPosting, setIsPostPop, setOrder, order }) => {
   let allPosts = useSelector(state => state.postReducer.allPosts);
   const loginUserId = useSelector(state => state.loginReducer.id);
   const pageNumRef = useRef([]);
   const [amountPerPage, setAmountPerPage] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
-  const [order, setOrder] = useState("latest");
   const postsAmount = name === "게시판" ? allPosts?.length : null;
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(postAction.getAllPosts());
+  }, []);
 
   function onChange(e) {
     setAmountPerPage(e.target.value * 1);
@@ -38,12 +41,23 @@ const Board = ({ name, setIsPosting }) => {
       setOrder("old");
     }
   }
+  function sortByVisited() {
+    if (order === "moreVisited") {
+      dispatch({ type: "SORT_POSTS_BY_DOWN_VISITED" });
+      setOrder("lessVisited");
+    } else {
+      dispatch({ type: "SORT_POSTS_BY_UP_VISITED" });
+      setOrder("moreVisited");
+    }
+  }
   useEffect(() => {
     pageNumRef.current.forEach(el => el?.classList.remove("active"));
     pageNumRef.current[currentPage - 1]?.classList.add("active");
   }, [currentPage]);
   useEffect(() => {
-    console.log(allPosts);
+    // 게시판 제일 마지막페이지에서 하나남은 글 삭제했을때 자동으로 전 페이지로 이동시키기
+    if (amountPerPage * (currentPage - 1) >= allPosts.length)
+      setCurrentPage(current => current - 1);
   }, [allPosts]);
   return (
     <div>
@@ -61,10 +75,12 @@ const Board = ({ name, setIsPosting }) => {
           <span style={{ width: "60%" }}>제목</span>
           <div style={{ display: "flex", alignItems: "center" }}>
             <div style={{ width: "100px" }}> 작성자 </div>
-            <div style={{ width: "120px" }} onClick={sortByDate}>
-              작성일 {order === "latest" ? "⇧" : order === "old" ? "⇩" : null}
+            <div style={{ width: "120px", cursor: "pointer" }} onClick={sortByDate}>
+              날짜 {order === "latest" ? "⇧" : order === "old" ? "⇩" : null}
             </div>
-            <div style={{ width: "60px" }}> 조회수 </div>
+            <div style={{ width: "120px", cursor: "pointer" }} onClick={sortByVisited}>
+              조회수 {order === "moreVisited" ? "⇧" : order === "lessVisited" ? "⇩" : null}
+            </div>
           </div>
         </Description>
         {name === "게시판" ? (
@@ -77,6 +93,7 @@ const Board = ({ name, setIsPosting }) => {
                   data={allPosts[ind + (currentPage - 1) * amountPerPage]}
                   LiNum={ind + (currentPage - 1) * amountPerPage + 1}
                   amountPerPage={amountPerPage}
+                  setIsPostPop={setIsPostPop}
                 />
               ))}
           </PostsWrap>
