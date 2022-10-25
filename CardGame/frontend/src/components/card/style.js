@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Wrap = styled.div`
-  border: 1px solid black;
+  border: 3px solid black;
   width: 200px;
   height: 100%;
   margin-right: 25px;
@@ -20,7 +20,7 @@ const Wrap = styled.div`
 const CardImg = styled.img`
   width: 150px;
   height: 150px;
-  border: 1px solid black;
+  border: 3px solid black;
   background-color: white;
 `;
 const CardDescription = styled.div`
@@ -28,7 +28,7 @@ const CardDescription = styled.div`
   width: 150px;
   height: 80px;
   margin-top: 10px;
-  border: 1px solid black;
+  border: 3px solid black;
   flex-wrap: wrap;
   font-size: 17px;
   padding: 2px;

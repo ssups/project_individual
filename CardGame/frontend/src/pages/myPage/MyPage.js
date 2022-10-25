@@ -75,7 +75,19 @@ const MyPage = () => {
         ></PopUp>
       ) : null}
       <Wrap>
-        인벤토리
+        <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+          <div
+            style={{
+              backgroundColor: "white",
+              width: "150px",
+              textAlign: "center",
+              border: "2px solid black",
+              borderRadius: "30px",
+            }}
+          >
+            인벤토리
+          </div>
+        </div>
         <Inventory>
           <InventoryWrap>
             {items.card_pack_basic > 0 ? (
@@ -104,8 +116,22 @@ const MyPage = () => {
             ) : null}
           </InventoryWrap>
         </Inventory>
-        카드덱 <button onClick={play}>재생</button>
-        <button onClick={stop}>정지</button>
+        <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+          <div
+            style={{
+              backgroundColor: "white",
+              width: "150px",
+              textAlign: "center",
+              border: "2px solid black",
+              borderRadius: "30px",
+            }}
+          >
+            카드덱
+          </div>
+          {/* <button onClick={play}>재생</button>
+          <button onClick={stop}>정지</button> */}
+        </div>
+
         <Inventory>
           <InventoryWrap ref={slide}>
             {cards[userId]

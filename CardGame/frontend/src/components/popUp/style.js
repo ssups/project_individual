@@ -2,7 +2,7 @@ import styled, { keyframes } from "styled-components";
 
 const itemMotion = keyframes`
   50%{
-    transform: scale(1.15);
+    transform: scale(1.23);
   }
   100%{
     transform: scale(1);
@@ -15,16 +15,9 @@ const popMotion = keyframes`
     height: 0;
     color: transparent;
   }
-  30%{
-    /* transform: translate(-50%, -50%) scale(1) rotate(180deg); */
-    /* opacity: 0.5; */
+  100%{
     width: 500px;
-    height: 500px;
-  }
-  80%{
-    /* transform: translate(-50%, -50%) scale(1) rotate(360deg); */
-    opacity: 1;
-    
+    opacity: 1;    
   }
 `;
 const Whole = styled.div`
@@ -37,9 +30,10 @@ const Whole = styled.div`
   backdrop-filter: blur(5px);
 `;
 const Wrap = styled.div`
-  border: 2px solid black;
+  /* border: 2px solid black; */
   width: 500px;
-  height: 500px;
+  height: ${props => (props.purpose === "card" ? "700px" : "500px")};
+  /* height: 700px; */
   position: absolute;
   left: 50%;
   top: 50%;
@@ -49,10 +43,10 @@ const Wrap = styled.div`
   align-items: center;
   justify-content: space-around;
   background-color: rgba(255, 255, 255, 0.75);
-  animation: ${popMotion} 1.5s linear;
+  animation: ${popMotion} 1s linear;
   & > svg {
-    width: 350px;
-    height: 350px;
+    width: 70%;
+    height: 70%;
     animation: ${itemMotion} 2s infinite;
   }
 `;
@@ -66,35 +60,42 @@ const Attribute = styled.div`
   }
   & > div > input {
     font-size: 30px;
-    width: 60px;
-    height: 50px;
+    width: 40%;
+    /* height: 50px; */
   }
 `;
 const Button = styled.button`
-  width: 200px;
+  /* width: 200px; */
+  width: 50%;
+  /* height: 10%; */
   height: 50px;
   font-family: "arirang";
   font-size: 30px;
+  overflow: hidden;
+  word-break: keep-all;
 `;
 const CardWrap = styled.div`
   width: 100%;
   height: 100%;
-  padding: 10px;
+  /* padding: 10px; */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  border: 6px solid black;
 `;
 const CardDescription = styled.div`
   background-color: white;
   width: 90%;
   height: 110px;
-  border: 1px solid black;
-  font-size: 35px;
+  font-size: 30px;
   padding: 5px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border: 6px solid black;
+  overflow: hidden;
+  word-break: keep-all;
 `;
 const CardStatusWrap = styled.div`
   display: flex;

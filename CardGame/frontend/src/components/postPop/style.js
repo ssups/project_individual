@@ -36,15 +36,20 @@ const TitleWrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid black;
 `;
 const Title = styled.div`
   width: 400px;
-  height: 50px;
+  height: 40px;
   font-family: "arirang";
   font-size: 30px;
+  font-weight: 900;
   text-align: center;
   margin-left: 20px;
   border: none;
+
   /* border-bottom: 1px solid black; */
   :focus-visible {
     outline: none;

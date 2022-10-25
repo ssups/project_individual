@@ -88,7 +88,7 @@ const UserContents = styled.span`
   }
   :last-child {
     position: absolute;
-    bottom: 0px;
+    bottom: 6px;
   }
 `;
 const alarmMotion = keyframes`

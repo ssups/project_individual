@@ -3,14 +3,20 @@ import styled from "styled-components";
 const Title = styled.div`
   width: 200px;
   height: 70px;
+  /* margin-top: 20px; */
   margin: auto;
   display: flex;
   align-items: center;
-  font-size: 50px;
+  justify-content: center;
+  font-size: 40px;
+  background-color: white;
+  transform: translateY(25%);
+  border: 2px solid black;
+  border-radius: 20px;
 `;
 const Selection = styled.select`
   position: absolute;
-  right: 0;
+  right: 120px;
   width: 50px;
   height: 100%;
   font-family: "arirang";
@@ -20,6 +26,7 @@ const Wrap = styled.div`
   width: 100%;
   height: calc(100vh - 250px);
   border: 2px solid black;
+  background-color: white;
 `;
 const Description = styled.div`
   width: 90%;
@@ -36,6 +43,7 @@ const PostsWrap = styled.div`
   height: calc(100vh - 300px);
   display: flex;
   flex-direction: column;
+  /* padding-bottom: 15px; */
   /* background-color: red; */
 `;
 
@@ -60,12 +68,16 @@ const PageNum = styled.span`
 `;
 const Button = styled.button`
   width: 100px;
-  height: 40px;
+  height: 30px;
   font-family: "arirang";
-  font-size: 30px;
+  font-size: 25px;
   box-sizing: border-box;
+  border: 2px solid black;
   position: absolute;
-  right: 0;
+  right: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export { Wrap, Title, Selection, PostsWrap, Description, Attributes, PageNum, Button };

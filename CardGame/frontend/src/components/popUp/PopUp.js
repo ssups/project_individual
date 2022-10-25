@@ -125,7 +125,7 @@ const PopUp = ({ purpose, setPopUp, popUpSvg, play, cardData }) => {
   // console.log(popUpSvg.props.style.width);
   return (
     <Whole onClick={closePopUp} data-for="backGround">
-      <Wrap>
+      <Wrap purpose={purpose}>
         {purpose === "inventory" ? (
           <>
             {popUpSvg}
@@ -158,13 +158,14 @@ const PopUp = ({ purpose, setPopUp, popUpSvg, play, cardData }) => {
         ) : null}
         {purpose === "card" ? (
           <CardWrap style={{ backgroundColor: averageColor, width: "100%", height: "100%" }}>
+            {/* <div style={{ width: "90%", height: "100px", backgroundColor: "orange" }}>ㅎㅇㅎㅇ</div> */}
             <img
               src={cards[cardData.img]}
               alt=""
               style={{
                 width: "90%",
-                height: "350px",
-                border: "1px solid black",
+                height: "70%",
+                border: "6px solid black",
                 backgroundColor: "white",
               }}
             ></img>

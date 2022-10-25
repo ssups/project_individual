@@ -62,7 +62,12 @@ const Board = ({ name, setIsPosting, setIsPostPop, setOrder, order }) => {
   return (
     <div>
       <Title>{name}</Title>
-      <div style={{ height: "30px", position: "relative" }}>
+      <div style={{ height: "30px", position: "relative", marginBottom: "10px" }}>
+        {name === "게시판" ? (
+          <Button onClick={() => setIsPosting(true)}>글쓰기</Button>
+        ) : loginUserId === "admin" ? (
+          <Button onClick={() => setIsPosting(true)}>공지쓰기</Button>
+        ) : null}
         <Selection name="" id="" onChange={onChange}>
           <option value="4">4</option>
           <option value="6">6</option>
@@ -71,8 +76,10 @@ const Board = ({ name, setIsPosting, setIsPostPop, setOrder, order }) => {
       </div>
       <Wrap>
         <Description>
-          <span style={{ width: "30px" }}></span>
-          <span style={{ width: "60%" }}>제목</span>
+          <div style={{ width: "100%", display: "flex", alignItems: "center" }}>
+            <div style={{ width: "50px", marginLeft: "40px", marginRight: "40px" }}>번호</div>{" "}
+            <div style={{ width: "100%" }}> 제목</div>
+          </div>
           <div style={{ display: "flex", alignItems: "center" }}>
             <div style={{ width: "100px" }}> 작성자 </div>
             <div style={{ width: "120px", cursor: "pointer" }} onClick={sortByDate}>
@@ -106,11 +113,6 @@ const Board = ({ name, setIsPosting, setIsPostPop, setOrder, order }) => {
                 {ind + 1}
               </PageNum>
             ))}
-          {name === "게시판" ? (
-            <Button onClick={() => setIsPosting(true)}>글쓰기</Button>
-          ) : loginUserId === "admin" ? (
-            <Button onClick={() => setIsPosting(true)}>공지쓰기</Button>
-          ) : null}
         </Attributes>
       </Wrap>
     </div>

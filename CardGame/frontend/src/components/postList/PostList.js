@@ -26,10 +26,28 @@ const PostList = ({ data, LiNum, amountPerPage, setIsPostPop }) => {
     <>
       {data ? (
         <List>
-          <span style={{ width: "30px", fontSize: `${100 / (amountPerPage / 2)}px` }}>{LiNum}</span>
+          <span
+            style={{
+              width: "50px",
+              fontSize: `${70 / (amountPerPage / 2)}px`,
+              textAlign: "center",
+              marginLeft: "40px",
+              marginRight: "40px",
+            }}
+          >
+            {LiNum}
+          </span>
           <span style={{ width: "60%", display: "flex", alignItems: "center" }}>
-            {data.thumb_nail && (
+            {data.thumb_nail ? (
               <ThumbNail src={data.thumb_nail} alt="" amountPerPage={amountPerPage}></ThumbNail>
+            ) : (
+              <div
+                style={{
+                  width: `calc((100vh - 300px) / ${amountPerPage} - 20px)`,
+                  height: `calc((100vh - 300px) / ${amountPerPage} - 20px)`,
+                  marginRight: "80px",
+                }}
+              ></div>
             )}
             <Title amountPerPage={amountPerPage} onClick={showPost}>
               {data.title}
