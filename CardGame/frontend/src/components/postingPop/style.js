@@ -88,7 +88,7 @@ const Button = styled.button`
   height: 50px;
   font-family: "arirang";
   font-size: 30px;
-  :last-child {
+  :nth-child(2) {
     margin-left: 80px;
   }
 `;

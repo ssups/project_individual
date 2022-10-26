@@ -26,7 +26,8 @@ const CenterBoard = styled.div`
   /* background-color: #e1e5eb; */
   background-color: white;
   border-radius: 30px;
-  /* border: 2px solid black; */
+  border: 2px solid black;
+  padding: 2px;
 `;
 const RightBoard = styled.div`
   width: 30%;
@@ -34,7 +35,7 @@ const RightBoard = styled.div`
   /* background-color: #e1e5eb; */
   background-color: white;
   border-radius: 30px;
-  /* border: 2px solid black; */
+  border: 2px solid black;
 `;
 const LeftBoard = styled.div`
   width: 30%;
@@ -42,7 +43,7 @@ const LeftBoard = styled.div`
   /* background-color: #e1e5eb; */
   background-color: white;
   border-radius: 30px;
-  /* border: 2px solid black; */
+  border: 2px solid black;
 `;
 const Title = styled.div`
   margin: auto;
@@ -57,13 +58,14 @@ const Title = styled.div`
 const BoardContents = styled.ul`
   list-style: none;
   margin: auto;
-  padding: 0;
   width: 80%;
   height: 80%;
   background-color: white;
+  padding: 0;
+
   /* display: flex; */
   /* align-items: center; */
-  /* justify-content: center; */
+  /* justify-content: space-between; */
   /* flex-direction: column; */
 `;
 const BoardList = styled.li`
@@ -73,7 +75,16 @@ const BoardList = styled.li`
   font-size: 20px;
   display: flex;
   align-items: center;
-  /* border-bottom: 1px solid black; */
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 5px;
+  font-family: "arirang";
+  border-bottom: 1px solid black;
+  :first-child {
+    border-bottom: 2px solid black;
+    font-weight: 900;
+    font-size: 23px;
+  }
 `;
 
 export {

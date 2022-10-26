@@ -48,7 +48,7 @@ const PostingPop = ({ setIsPosting, setOrder }) => {
           </div>
           <ButtonWrap>
             <Button onClick={register}>작성</Button>
-            <Button>취소</Button>
+            {/* <Button>취소</Button> */}
           </ButtonWrap>
         </InnerWrap>
       </Wrap>

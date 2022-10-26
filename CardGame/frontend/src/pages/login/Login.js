@@ -32,7 +32,6 @@ const Login = ({ setIsLoginPage, setOnLoad }) => {
             setIsLoginPage={setIsLoginPage}
           ></LoginComp>
         )}
-        <button onClick={onClick}>이동</button>
       </Wrap>
     </Whole>
   );

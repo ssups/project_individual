@@ -36,7 +36,6 @@ const TitleWrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 10px;
   margin-bottom: 10px;
   border-bottom: 1px solid black;
 `;
@@ -108,10 +107,12 @@ const CommentWrap = styled.details`
   /* border-bottom: 1px solid black; */
   &[open] {
     & > div {
-      border: 1px solid black;
+      :nth-child(3) {
+        border: 1px solid black;
+      }
     }
     & > summary {
-      margin-bottom: 20px;
+      /* margin-bottom: 20px; */
     }
   }
 `;
@@ -120,19 +121,35 @@ const CommentInputWrap = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
+  padding: 20px;
 `;
 const CommentInput = styled.input`
-  width: 87%;
+  width: 90%;
   /* transform: translateX(-5px); */
+  margin: 0 15px 0 15px;
   border: none;
   border-bottom: 1px solid black;
+  padding-left: 10px;
   font-family: "arirang";
   font-size: 23px;
+  :focus-visible {
+    outline: none;
+  }
 `;
 const CommentBtn = styled.button`
   font-family: "arirang";
   font-size: 23px;
   width: 55px;
+`;
+const Comments = styled.div`
+  padding: 20px;
+`;
+const CommentsButton = styled.button`
+  width: 23px;
+  height: 23px;
+  background-color: white;
+  border: none;
+  cursor: pointer;
 `;
 const ButtonWrap = styled.div`
   width: 100%;
@@ -167,6 +184,8 @@ export {
   CommentInputWrap,
   CommentInput,
   CommentBtn,
+  Comments,
+  CommentsButton,
   ButtonWrap,
   Button,
   ImgArea,

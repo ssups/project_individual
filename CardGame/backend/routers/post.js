@@ -1,9 +1,13 @@
 const router = require("express").Router();
-const { Post } = require("../model");
+const { Post, Comment } = require("../model");
 const parser = require("html-react-parser");
+const { raw } = require("express");
 
 router.get("/get_all_posts", async (req, res) => {
-  const allPosts = await Post.findAll({ raw: true });
+  const allPosts = await Post.findAll({
+    order: [["createdAt", "desc"]],
+    include: { model: Comment },
+  });
   res.send(allPosts);
 });
 
@@ -22,7 +26,10 @@ router.post("/posting", async (req, res) => {
     main,
     thumb_nail,
   });
-  const allPosts = await Post.findAll({ raw: true });
+  const allPosts = await Post.findAll({
+    order: [["createdAt", "desc"]],
+    include: { model: Comment },
+  });
 
   res.send({ msg: "등록 완료", data: allPosts });
 });
@@ -30,7 +37,7 @@ router.post("/posting", async (req, res) => {
 router.post("/modify_post", async (req, res) => {
   const { postId, modifiedTitle, modifiedMain } = req.body;
   const parserdMain = parser(modifiedMain);
-  console.log(modifiedMain);
+  // console.log(modifiedMain);
   const modifiedThumbNail =
     parserdMain.length >= 2
       ? parserdMain.filter(el => el.props.className === "image")[0]?.props.children.props.src
@@ -45,15 +52,21 @@ router.post("/modify_post", async (req, res) => {
     },
     { where: { id: postId } }
   );
-  const allPosts = await Post.findAll({ raw: true });
-  const modifiedPost = await Post.findOne({ where: { id: postId }, raw: true });
+  const allPosts = await Post.findAll({
+    order: [["createdAt", "desc"]],
+    include: { model: Comment },
+  });
+  const modifiedPost = await Post.findOne({ where: { id: postId } });
   res.send({ msg: "수정 완료", data: allPosts, modifiedPost });
 });
 
 router.post("/del_post", async (req, res) => {
   const { postId } = req.body;
   await Post.destroy({ where: { id: postId } });
-  const allPosts = await Post.findAll({ raw: true });
+  const allPosts = await Post.findAll({
+    order: [["createdAt", "desc"]],
+    include: { model: Comment },
+  });
   res.send({ msg: "삭제 완료", data: allPosts });
 });
 

@@ -15,6 +15,8 @@ import {
   CommentInputWrap,
   CommentInput,
   CommentBtn,
+  Comments,
+  CommentsButton,
   ButtonWrap,
   Button,
 } from "./style";
@@ -60,6 +62,9 @@ const PostPop = ({ setIsPostPop, setOrder }) => {
     dispatch(commetAction.registerComment(data.id, loginId, commentVal));
     commentRef.current.value = "";
   }
+  function delComment(commentId) {
+    dispatch(commetAction.delComment(commentId, data.id));
+  }
 
   return (
     <Whole data-for="backGround" onClick={closePostingPop}>
@@ -75,7 +80,7 @@ const PostPop = ({ setIsPostPop, setOrder }) => {
             )}
           </TitleWrap>
           <SubTitle>
-            <span>작성자:{data?.user_id}</span>
+            <span>작성자: {data?.user_id}</span>
             {mode === "normal" ? (
               <span>조회수:{loginId !== data?.user_id ? data?.visited + 1 : data?.visited}</span>
             ) : null}
@@ -92,23 +97,48 @@ const PostPop = ({ setIsPostPop, setOrder }) => {
           {mode === "normal" && (
             <CommentWrap>
               <summary>댓글</summary>
-              <div style={{ padding: "20px" }}>
-                <CommentInputWrap>
-                  {loginId} : <CommentInput type="text" ref={commentRef} />
-                  <CommentBtn onClick={registerComment}>등록</CommentBtn>
-                </CommentInputWrap>
-                {comments.map(
-                  el =>
+
+              <CommentInputWrap>
+                <span style={{ width: "maxContent", height: "26px" }}>{loginId}:</span>
+                <CommentInput type="text" ref={commentRef} />
+                <CommentBtn onClick={registerComment}>등록</CommentBtn>
+              </CommentInputWrap>
+              <Comments>
+                {comments.map(el => {
+                  const time = new Date(el?.updatedAt);
+                  return (
                     el && (
-                      <div key={el.id}>
-                        {el.writer} : {el.text}
+                      <div
+                        key={el.id}
+                        style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}
+                      >
+                        <span>{el.writer}: </span>
+                        <div
+                          style={{
+                            marginLeft: " 15px",
+                            borderBottom: "1px solid black",
+                            width: "100%",
+                            paddingLeft: "10px",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <span>{el.text}</span>
+                          <span
+                            style={{ fontSize: "17px" }}
+                          >{`${time.getFullYear()}-${time.getMonth()}-${time.getDate()} ${time.getHours()}:${time.getMinutes()}`}</span>
+                        </div>
+                        {el.writer === loginId ? (
+                          <CommentsButton onClick={() => delComment(el.id)}>x</CommentsButton>
+                        ) : (
+                          <div style={{ width: "25px", height: "25px" }}></div>
+                        )}
                       </div>
                     )
-                )}
-              </div>
-              {/* <div>gdgd</div>
-            <div>gdgd</div>
-            <div>gdgd</div> */}
+                  );
+                })}
+              </Comments>
             </CommentWrap>
           )}
           <ButtonWrap>

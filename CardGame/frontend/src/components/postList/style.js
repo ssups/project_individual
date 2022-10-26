@@ -16,8 +16,14 @@ const List = styled.div`
 const Title = styled.span`
   cursor: pointer;
   font-size: ${props => `${90 / (props.amountPerPage / 2)}px`};
+  display: flex;
+  align-items: center;
   :hover {
     text-decoration: underline;
+  }
+  & span {
+    margin-left: 15px;
+    font-size: ${props => `${70 / (props.amountPerPage / 2)}px`};
   }
 `;
 const ThumbNail = styled.img`

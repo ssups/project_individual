@@ -40,4 +40,9 @@ router.post("/join", async (req, res) => {
   }
 });
 
+router.get("/get_users_point", async (req, res) => {
+  const data = await User.findAll({ attributes: ["point", "user_id"], order: [["point", "desc"]] });
+  res.send(data);
+});
+
 module.exports = router;

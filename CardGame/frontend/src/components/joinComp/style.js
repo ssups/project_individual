@@ -21,17 +21,22 @@ const Fieldset = styled.fieldset`
 `;
 const Legend = styled.legend`
   font-size: 40px;
+  text-align: center;
 `;
 const Item = styled.div`
   margin-bottom: 30px;
   width: 250px;
+  height: 30px;
   display: flex;
   justify-content: space-between;
   :last-child {
     margin-bottom: 10px;
   }
 `;
-const Label = styled.label``;
+const Label = styled.label`
+  height: 30px;
+  /* text-align: center; */
+`;
 const Input = styled.input`
   width: 150px;
 `;

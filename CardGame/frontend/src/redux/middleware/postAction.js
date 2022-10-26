@@ -5,6 +5,7 @@ function getAllPosts() {
     const { data: response } = await axios({
       url: "http://localhost:4000/get_all_posts",
     });
+    // console.log(response);
     dispatch({ type: "GET_ALL_POSTS", payload: response });
   };
 }
@@ -35,7 +36,7 @@ function modifyPost(postId, modifiedTitle, modifiedMain, setOrder, setMode) {
     alert(response.msg);
     if (response.msg === "수정 완료") {
       dispatch({ type: "GET_ALL_POSTS", payload: response.data });
-      console.log(response.modifiedPost);
+      // console.log(response.modifiedPost);
       dispatch({ type: "SET_POP_UP_POST_DATA", payload: response.modifiedPost });
       setOrder("latest");
       setMode("normal");

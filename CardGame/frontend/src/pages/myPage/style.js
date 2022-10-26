@@ -27,7 +27,7 @@ const InventoryWrap = styled.div`
   /* flexbox하면 자식요소의 너비값 그대로 유지되면서 inline 으로 배치됨 */
   display: flexbox;
   align-items: center;
-  padding: 30px 0 30px 0;
+  padding: 30px 20px 30px 20px;
   overflow-x: scroll;
   perspective: 1000px;
 `;

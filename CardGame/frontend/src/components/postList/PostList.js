@@ -8,17 +8,16 @@ const PostList = ({ data, LiNum, amountPerPage, setIsPostPop }) => {
   const dispatch = useDispatch();
   const loginUser = useSelector(state => state.loginReducer.id);
   const Html = <>parser(data?.main)</>;
-  const time = new Date(data?.updatedAt);
+  const time = new Date(data?.createdAt);
   // 달이 좀 이상함;
   const month = time.getMonth() + 1;
   function showPost() {
     dispatch({ type: "SET_POP_UP_POST_DATA", payload: data });
+    dispatch(commetAction.getComments(data.id));
     if (data.user_id !== loginUser) {
       data.visited++;
       dispatch(postAction.increaseVisited(data.id));
-      dispatch(commetAction.getComments(data.id));
     }
-
     setIsPostPop(true);
   }
 
@@ -50,7 +49,7 @@ const PostList = ({ data, LiNum, amountPerPage, setIsPostPop }) => {
               ></div>
             )}
             <Title amountPerPage={amountPerPage} onClick={showPost}>
-              {data.title}
+              {data.title} <span>({data.Comments?.length})</span>
             </Title>
           </span>
           <div style={{ display: "flex", alignItems: "center", textAlign: "center" }}>

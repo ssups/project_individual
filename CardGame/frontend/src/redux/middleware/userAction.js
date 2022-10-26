@@ -39,4 +39,13 @@ function getUserItems(id) {
   };
 }
 
-export const userAction = { join, getUserCards, getUserItems };
+function getAllUsersPoints() {
+  return async (dispatch, state) => {
+    const { data: response } = await axios({
+      url: "http://localhost:4000/get_users_point",
+    });
+    response && dispatch({ type: "GET_ALL_USERS_POINTS", payload: response });
+  };
+}
+
+export const userAction = { join, getUserCards, getUserItems, getAllUsersPoints };

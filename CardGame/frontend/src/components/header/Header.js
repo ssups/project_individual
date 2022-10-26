@@ -65,7 +65,7 @@ const Header = ({ setOnLoad }) => {
             <MenuLi>
               <MenuImg src={flower_greyblue} alt="" /> 게임
             </MenuLi>
-            <MenuLi>
+            <MenuLi data-path="/card_book" onClick={e => move(e.currentTarget.dataset.path)}>
               <MenuImg src={flower_purple} alt="" />
               카드북
             </MenuLi>
@@ -91,7 +91,9 @@ const Header = ({ setOnLoad }) => {
               로그아웃
             </UserContents>
             <UserContents style={{ fontSize: "20px" }}>
-              보유 포인트: {userData.point?.toLocaleString()}P
+              {/* <span style={{ fontWeight: "900" }}>{userData.id}</span>님 */}
+              <span style={{ marginRight: "10px" }}> 보유 포인트:</span>
+              {userData.point?.toLocaleString()}P
             </UserContents>
           </User>
         </Wrap>

@@ -16,11 +16,24 @@ const Title = styled.div`
 `;
 const Selection = styled.select`
   position: absolute;
-  right: 120px;
+  right: 0px;
   width: 50px;
   height: 100%;
   font-family: "arirang";
   font-size: 25px;
+`;
+const Button = styled.button`
+  width: 100px;
+  height: 30px;
+  font-family: "arirang";
+  font-size: 25px;
+  box-sizing: border-box;
+  border: 2px solid black;
+  position: absolute;
+  right: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 const Wrap = styled.div`
   width: 100%;
@@ -65,19 +78,6 @@ const PageNum = styled.span`
   &.active {
     color: red;
   }
-`;
-const Button = styled.button`
-  width: 100px;
-  height: 30px;
-  font-family: "arirang";
-  font-size: 25px;
-  box-sizing: border-box;
-  border: 2px solid black;
-  position: absolute;
-  right: 0px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 export { Wrap, Title, Selection, PostsWrap, Description, Attributes, PageNum, Button };
