@@ -4,6 +4,7 @@ const Whole = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 `;
 const Wrap = styled.div`
   width: 1300px;

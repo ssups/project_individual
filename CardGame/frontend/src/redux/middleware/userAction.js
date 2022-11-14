@@ -44,7 +44,7 @@ function getAllUsersPoints() {
     const { data: response } = await axios({
       url: "http://localhost:4000/get_users_point",
     });
-    response && dispatch({ type: "4GET_ALL_USERS_POINTS", payload: response });
+    response && dispatch({ type: "GET_ALL_USERS_POINTS", payload: response });
   };
 }
 

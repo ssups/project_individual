@@ -19,20 +19,28 @@ const PopUp = ({ purpose, setPopUp, popUpSvg, play, cardData }) => {
   if (cardData) {
     var attackColor =
       cardData.attack >= 25
-        ? "gold"
+        ? "rgb(212,175,55)"
         : cardData.attack < 25 && cardData.attack >= 15
-        ? "silver"
+        ? "rgb(170,169,173)"
         : "black";
     var defColor =
-      cardData.def >= 25 ? "gold" : cardData.def < 25 && cardData.def >= 15 ? "silver" : "black";
+      cardData.def >= 25
+        ? "rgb(212,175,55)"
+        : cardData.def < 25 && cardData.def >= 15
+        ? "rgb(170,169,173)"
+        : "black";
     var averageColor =
       cardData.average >= 25
-        ? "gold"
+        ? "rgb(212,175,55)"
         : cardData.average < 25 && cardData.average >= 15
-        ? "silver"
+        ? "rgb(170,169,173)"
         : "black";
     var rarityColor =
-      cardData.rarity === "UltraRare" ? "gold" : cardData.rarity === "Rare" ? "silver" : "black";
+      cardData.rarity === "UltraRare"
+        ? "rgb(212,175,55)"
+        : cardData.rarity === "Rare"
+        ? "rgb(170,169,173)"
+        : "black";
   }
   // console.log(popUpSvg);
   function closePopUp(e) {

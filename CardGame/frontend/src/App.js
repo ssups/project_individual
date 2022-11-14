@@ -1,6 +1,6 @@
 import "./App.css";
 import { Header } from "./components";
-import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate, useLocation } from "react-router-dom";
 import { Login, Loading, Main, Shop, MyPage, PublicBoard, NoticeBoard, CardBook } from "./pages";
 import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -50,7 +50,7 @@ function App() {
   return (
     <div className="App">
       {onLoad || isLoginPage ? null : <Header setOnLoad={setOnLoad}></Header>}
-      {onLoad || isLoginPage ? null : <div style={{ height: "100px" }}></div>}
+      {/* {onLoad || isLoginPage ? null : <div style={{ height: "100px" }}></div>} */}
       <div className="main">
         <Routes>
           <Route

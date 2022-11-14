@@ -15,7 +15,6 @@ const Editor = ({ setPostData, mode, data, setModifyData }) => {
             axios({
               method: "post",
               url: "http://localhost:4000/api/upload",
-              //   url: "api/upload",
               data,
             }).then(res => {
               resolve({

@@ -13,6 +13,8 @@ router.get("/get_all_posts", async (req, res) => {
 
 router.post("/posting", async (req, res) => {
   const { id, title, main } = req.body;
+  // console.log("원본" + main);
+  // console.log("펄스한거" + parser(main));
   const thumb_nail =
     // 문제점: 글중간에 안뛰우고 바로 사진첨부하면 img태그가 p태그 안으로 들어가버려서 썸네일 사진으로 인식안됨
     parser(main).length >= 2

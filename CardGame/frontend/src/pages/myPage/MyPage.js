@@ -4,6 +4,8 @@ import { Wrap, Inventory, InventoryWrap, Item } from "./style";
 import { Card } from "../../components";
 import { PopUp, PopUP } from "../../components";
 import { itemAction, userAction } from "../../redux/middleware";
+import AudioPlayer from "react-h5-audio-player";
+import { myPageSound } from "../../sounds";
 import svg from "../../icons/svgs";
 const MyPage = () => {
   const userId = useSelector(state => state.loginReducer.id);
@@ -18,6 +20,7 @@ const MyPage = () => {
   const dispatch = useDispatch();
   const slide = useRef();
   const interval = useRef();
+  const audioRef = useRef();
 
   useEffect(() => {
     // console.log(items);
@@ -64,7 +67,14 @@ const MyPage = () => {
   }
 
   return (
-    <div className="contents">
+    <div className="contents" style={{ position: "relative" }}>
+      <AudioPlayer
+        src={myPageSound}
+        autoPlay={true}
+        ref={audioRef}
+        volume={1}
+        style={{ display: "none" }}
+      />
       {popUp ? (
         <PopUp
           setPopUp={setPopUp}

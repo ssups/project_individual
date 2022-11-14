@@ -72,6 +72,7 @@ const PageNum = styled.span`
   border-left: 2px solid rgba(0, 0, 0, 0.5);
   padding-left: 10px;
   margin-right: 10px;
+  cursor: pointer;
   :first-child {
     border: none;
   }

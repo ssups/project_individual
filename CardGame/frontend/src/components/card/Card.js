@@ -4,12 +4,29 @@ import { cards } from "../../images";
 
 const Card = ({ data, setPopUp, setPurpose, stop, setCardData }) => {
   const attackColor =
-    data.attack >= 25 ? "gold" : data.attack < 25 && data.attack >= 15 ? "silver" : "black";
-  const defColor = data.def >= 25 ? "gold" : data.def < 25 && data.def >= 15 ? "silver" : "black";
+    data.attack >= 25
+      ? "rgb(212,175,55)"
+      : data.attack < 25 && data.attack >= 15
+      ? "rgb(170,169,173)"
+      : "black";
+  const defColor =
+    data.def >= 25
+      ? "rgb(212,175,55)"
+      : data.def < 25 && data.def >= 15
+      ? "rgb(170,169,173)"
+      : "black";
   const averageColor =
-    data.average >= 25 ? "gold" : data.average < 25 && data.average >= 15 ? "silver" : "black";
+    data.average >= 25
+      ? "rgb(212,175,55)"
+      : data.average < 25 && data.average >= 15
+      ? "rgb(170,169,173)"
+      : "black";
   const rarityColor =
-    data.rarity === "UltraRare" ? "gold" : data.rarity === "Rare" ? "silver" : "black";
+    data.rarity === "UltraRare"
+      ? "rgb(212,175,55)"
+      : data.rarity === "Rare"
+      ? "rgb(170,169,173)"
+      : "black";
   function showCard(e) {
     console.log(e.currentTarget);
     stop();

@@ -17,22 +17,27 @@ const CardBook = () => {
       <Wrap>
         {Object.keys(cards)
           .reverse()
-          .map(key => (
-            <CardWrap key={key}>
-              {usersCards[userId]?.map(el => el.img).includes(key) ? (
-                <CardCount>x{usersCards[userId]?.filter(el => el.img === key).length}</CardCount>
-              ) : null}
-              <CardImg
-                src={cards[key]}
-                style={
-                  usersCards[userId]?.map(el => el.img).includes(key)
-                    ? { filter: "none" }
-                    : { filter: "grayscale(100%)" }
-                }
-              ></CardImg>
-              {/* <div>{usersCards[userId]?.filter(el => el.img === key).length}</div> */}
-            </CardWrap>
-          ))}
+          .map(key => {
+            const cardFilter = usersCards[userId]?.map(el => el.img).includes(key)
+              ? "none"
+              : "grayscale(100%)";
+            const cardBackColor = key.includes("ultra") ? "rgb(212,175,55)" : "whitesmoke";
+            return (
+              <CardWrap key={key} style={{ filter: cardFilter, backgroundColor: cardBackColor }}>
+                {usersCards[userId]?.map(el => el.img).includes(key) ? (
+                  <CardCount>x{usersCards[userId]?.filter(el => el.img === key).length}</CardCount>
+                ) : null}
+                <CardImg
+                  src={cards[key]}
+                  // style={
+                  //   usersCards[userId]?.map(el => el.img).includes(key)
+                  //     ? { filter: "none" }
+                  //     : { filter: "grayscale(100%)" }
+                  // }
+                ></CardImg>
+              </CardWrap>
+            );
+          })}
       </Wrap>
     </Whole>
   );

@@ -7,6 +7,7 @@ import {
   Logo,
   Menu,
   MenuLi,
+  MenuContents,
   MenuImg,
   User,
   UserContents,
@@ -59,23 +60,34 @@ const Header = ({ setOnLoad }) => {
           </Logo>
           <Menu>
             <MenuLi data-path="/shop" onClick={e => move(e.currentTarget.dataset.path)}>
-              <MenuImg src={flower_red} alt="" />
-              상점
+              <MenuContents>
+                <MenuImg src={flower_red} alt="" />
+                <span>상점</span>
+              </MenuContents>
             </MenuLi>
             <MenuLi>
-              <MenuImg src={flower_greyblue} alt="" /> 게임
+              <MenuContents>
+                <MenuImg src={flower_greyblue} alt="" />
+                <span>게임</span>
+              </MenuContents>
             </MenuLi>
             <MenuLi data-path="/card_book" onClick={e => move(e.currentTarget.dataset.path)}>
-              <MenuImg src={flower_purple} alt="" />
-              카드북
+              <MenuContents>
+                <MenuImg src={flower_purple} alt="" />
+                <span>카드북</span>
+              </MenuContents>
             </MenuLi>
             <MenuLi data-path="/public_board" onClick={e => move(e.currentTarget.dataset.path)}>
-              <MenuImg src={flower_skyblue} alt="" />
-              게시판
+              <MenuContents>
+                <MenuImg src={flower_skyblue} alt="" />
+                <span>게시판</span>
+              </MenuContents>
             </MenuLi>
             <MenuLi data-path="/notice_board" onClick={e => move(e.currentTarget.dataset.path)}>
-              <MenuImg src={flower_yellow} alt="" />
-              공지사항
+              <MenuContents>
+                <MenuImg src={flower_yellow} alt="" />
+                <span>공지사항</span>
+              </MenuContents>
             </MenuLi>
           </Menu>
           <User>

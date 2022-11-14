@@ -99,7 +99,7 @@ const PostPop = ({ setIsPostPop, setOrder }) => {
               <summary>댓글</summary>
 
               <CommentInputWrap>
-                <span style={{ width: "maxContent", height: "26px" }}>{loginId}:</span>
+                <div style={{ width: "maxContent", height: "26px" }}>{loginId}:</div>
                 <CommentInput type="text" ref={commentRef} />
                 <CommentBtn onClick={registerComment}>등록</CommentBtn>
               </CommentInputWrap>
@@ -117,14 +117,14 @@ const PostPop = ({ setIsPostPop, setOrder }) => {
                           style={{
                             marginLeft: " 15px",
                             borderBottom: "1px solid black",
-                            width: "100%",
                             paddingLeft: "10px",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "space-between",
+                            flexGrow: "1",
                           }}
                         >
-                          <span>{el.text}</span>
+                          <span style={{}}>{el.text}</span>
                           <span
                             style={{ fontSize: "17px" }}
                           >{`${time.getFullYear()}-${time.getMonth()}-${time.getDate()} ${time.getHours()}:${time.getMinutes()}`}</span>

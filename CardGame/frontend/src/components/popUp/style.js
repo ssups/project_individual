@@ -24,7 +24,8 @@ const Whole = styled.div`
   position: absolute;
   background-color: rgba(0, 0, 0, 0.3);
   width: 100%;
-  height: calc(100vh - 100px);
+  /* height: calc(100vh - 100px); */
+  height: 100%;
   z-index: 999;
   /* 배경 흐리게 */
   backdrop-filter: blur(5px);

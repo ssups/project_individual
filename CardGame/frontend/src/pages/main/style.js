@@ -59,9 +59,10 @@ const BoardContents = styled.ul`
   list-style: none;
   margin: auto;
   width: 80%;
-  height: 80%;
+  height: calc(100% - 130px);
   background-color: white;
   padding: 0;
+  overflow-y: scroll;
 
   /* display: flex; */
   /* align-items: center; */

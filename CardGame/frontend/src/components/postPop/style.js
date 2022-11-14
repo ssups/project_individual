@@ -124,8 +124,9 @@ const CommentInputWrap = styled.div`
   padding: 20px;
 `;
 const CommentInput = styled.input`
-  width: 90%;
-  /* transform: translateX(-5px); */
+  /* width: 90%; */
+  flex-grow: 1;
+  max-width: 90%;
   margin: 0 15px 0 15px;
   border: none;
   border-bottom: 1px solid black;

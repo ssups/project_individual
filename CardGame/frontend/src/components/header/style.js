@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components";
 
 const Whole = styled.div`
-  position: fixed;
+  /* position: fixed; */
   width: 100%;
   height: 100px;
   /* border-bottom: 2px solid black; */
@@ -16,6 +16,11 @@ const Wrap = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
+const spin = keyframes`
+100%{
+  transform: rotate(360deg);
+}
+`;
 const Logo = styled.div`
   width: max-content;
   height: 100%;
@@ -25,7 +30,11 @@ const Logo = styled.div`
   font-size: 23px;
   :hover {
     transform: scale(1.1);
+    & img {
+      animation: ${spin} 1s linear infinite;
+    }
   }
+
   /* background-color: yellow; */
 `;
 const Menu = styled.ul`
@@ -52,8 +61,15 @@ const MenuLi = styled.li`
   cursor: pointer;
   margin-left: 15px;
   padding-right: 15px;
+`;
+const MenuContents = styled.div`
+  display: flex;
+  align-items: center;
   :hover {
-    transform: scale(1.1);
+    transform: scale(1.25);
+    & img {
+      animation: ${spin} 1s linear infinite;
+    }
   }
 `;
 const MenuImg = styled.img`
@@ -62,11 +78,12 @@ const MenuImg = styled.img`
 `;
 const User = styled.div`
   width: 232px;
-  height: 65px;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  position: relative;
   /* background-color: yellow; */
 `;
 const UserContents = styled.span`
@@ -128,4 +145,16 @@ const AlarmNum = styled.span`
   transform: translateX(-50%);
   text-align: center;
 `;
-export { Whole, Wrap, Logo, Menu, MenuLi, MenuImg, User, UserContents, Alarm, AlarmNum };
+export {
+  Whole,
+  Wrap,
+  Logo,
+  Menu,
+  MenuLi,
+  MenuContents,
+  MenuImg,
+  User,
+  UserContents,
+  Alarm,
+  AlarmNum,
+};
