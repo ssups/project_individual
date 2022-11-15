@@ -15,11 +15,32 @@ import {
   FooterBtn,
   FooterBtnText,
 } from "./style";
-import { Text, View, Button } from "react-native";
-import React from "react";
+import { Text, View, TextInput } from "react-native";
+import React, { useRef, useState } from "react";
 import { twitter_logo } from "../../images";
 
-const Entrance = () => {
+const Entrance = ({ navigation }) => {
+  const [id, setId] = useState("");
+  const [pw, setPw] = useState();
+  const inputIdRef = useRef();
+  const inputPwRef = useRef();
+
+  const login = () => {
+    // 공백처리
+    if (id === "") {
+      inputIdRef.current.focus();
+      return;
+    }
+    if (pw === "") {
+      inputPwRef.current.focus();
+      return;
+    }
+    // 두번째 인수 객체는 parms 값으로 넘어감
+    navigation.navigate("Main", { id });
+    setId("");
+    setPw("");
+  };
+
   return (
     <Container>
       <TittleBox>
@@ -31,11 +52,27 @@ const Entrance = () => {
         </LogoBox>
         <InputBox>
           <InputText>아이디:</InputText>
-          <Input></Input>
+          <Input
+            ref={inputIdRef}
+            autoCorrect={false}
+            autoFocus={true}
+            onSubmitEditing={() => inputPwRef.current.focus()}
+            onChangeText={payload => setId(payload)}
+            value={id}
+            autoCapitalize="none"
+          ></Input>
+          {/* <TextInput></TextInput> */}
         </InputBox>
         <InputBox>
           <InputText>비밀번호:</InputText>
-          <Input></Input>
+          <Input
+            ref={inputPwRef}
+            autoCorrect={false}
+            onSubmitEditing={login}
+            secureTextEntry={true}
+            onChangeText={payload => setPw(payload)}
+            value={pw}
+          ></Input>
         </InputBox>
         <BtnBox>
           <Btn>
@@ -47,7 +84,7 @@ const Entrance = () => {
         </BtnBox>
       </ContentsBox>
       <Footer>
-        <FooterBtn>
+        <FooterBtn onPress={login}>
           <FooterBtnText>로그인</FooterBtnText>
         </FooterBtn>
       </Footer>
