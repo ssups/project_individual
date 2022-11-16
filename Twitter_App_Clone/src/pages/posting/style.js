@@ -7,28 +7,22 @@ const Container = styled.View`
   justify-content: center;
   background-color: ${color.main};
 `;
-const Wrapper = styled.View`
-  flex: 0.9;
-  width: 80%;
-  background-color: white;
-  border-radius: 20px;
+const Wrapper = styled.ScrollView``;
+const ProfileBox = styled.View`
+  height: 50px;
+  justify-content: center;
 `;
-
-const PostingBox = styled.View`
-  flex: 1;
-  flex-direction: row;
-  align-items: center;
-  background-color: white;
-  border-radius: 20px;
+const ProfileImg = styled.Image`
+  height: 35px;
+  width: 35px;
+  border-radius: 100%;
+  border-radius: 100%;
 `;
 const PostingInput = styled.TextInput`
-  border: 2px solid black;
-`;
-const PostingBtn = styled.TouchableOpacity`
-  margin-left: 20px;
-`;
-const PostingBtnText = styled.Text`
-  font-size: 20px;
+  flex: 9;
+  font-size: 17px;
+  padding-left: 40px;
+  min-height: ${props => props.heightprops - 80 + "px"};
 `;
 
-export { Container, Wrapper, PostingBox, PostingInput, PostingBtn, PostingBtnText };
+export { Container, Wrapper, PostingInput, ProfileBox, ProfileImg };

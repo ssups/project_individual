@@ -13,7 +13,7 @@ const Main = ({ navigation, route }) => {
         <PostingBtnBox style={styles.shadow}>
           <PostingBtn
             onPress={() => {
-              navigation.navigate("Posting", {});
+              navigation.navigate("Posting", { id: route.params.id });
             }}
           >
             <PostingBtnText>+</PostingBtnText>

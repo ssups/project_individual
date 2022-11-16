@@ -16,19 +16,16 @@ const Wrapper = styled.View`
 `;
 const PostingBtnBox = styled.View`
   position: absolute;
-  bottom: 0;
-  right: 0;
-  /* box-shadow: 10px 5px 5px black; */
+  bottom: 10px;
+  right: 10px;
 `;
 const PostingBtn = styled.TouchableOpacity`
   background-color: ${color.main};
-  border: 2px solid white;
   border-radius: 50%;
   width: 50px;
   height: 50px;
   align-items: center;
   justify-content: center;
-  /* box-shadow: 10px black; */
 `;
 const PostingBtnText = styled.Text`
   font-size: 30px;

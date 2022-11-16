@@ -1,47 +1,14 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import { Entrance, Main, Posting } from "./src/pages";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import color from "./src/color";
+import React from "react";
 
-const Stack = createNativeStackNavigator();
+import Stacks from "./Stacks";
 
 export default function App() {
+  // 헤더부분에 useNavigation 함수 쓸려고 Stacks 컴포넌트 따로 만듬
+  // useNavigation()은 NavigationContainer 안에있는 컴포넌트에서만 선언이 가능하기 때문
   return (
     <NavigationContainer>
-      <View style={styles.container}>
-        <StatusBar style="auto" />
-        <Stack.Navigator>
-          {/* name값이랑 component이름이랑 다르면 오류남 */}
-          <Stack.Screen name="Entrance" component={Entrance} options={{ headerShown: false }} />
-          <Stack.Screen
-            name="Main"
-            component={Main}
-            options={{
-              title: "게시판",
-              // headerTransparent: true,
-              // headerBackground: () => <View style={{ backgroundColor: "red" }}></View>,
-              headerStyle: { backgroundColor: color.main },
-            }}
-          />
-          <Stack.Screen
-            name="Posting"
-            component={Posting}
-            options={{ title: "게시글 작성", headerStyle: { backgroundColor: color.main } }}
-          />
-        </Stack.Navigator>
-      </View>
+      <Stacks />
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-    // alignItems: "center",
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-});
