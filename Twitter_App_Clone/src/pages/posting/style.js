@@ -22,7 +22,8 @@ const PostingInput = styled.TextInput`
   flex: 9;
   font-size: 17px;
   padding-left: 40px;
-  min-height: ${props => props.heightprops - 80 + "px"};
+  min-height: ${props => props.heightprops - 90 + "px"};
+  /* min-height: 500px; */
 `;
 
 export { Container, Wrapper, PostingInput, ProfileBox, ProfileImg };

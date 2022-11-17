@@ -1,4 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
+import {} from "";
 import React from "react";
 
 import Stacks from "./Stacks";
@@ -12,3 +13,4 @@ export default function App() {
     </NavigationContainer>
   );
 }
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd;
