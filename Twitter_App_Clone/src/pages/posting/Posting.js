@@ -9,9 +9,11 @@ import {
   Keyboard,
   ScrollView,
   View,
-  Platform,
+  Button,
 } from "react-native";
 import { useHeaderHeight } from "@react-navigation/elements";
+import { useSelector, useDispatch } from "react-redux";
+import { postAction } from "../../redux/middleware";
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
 // console.log(Dimensions.get("window"));
@@ -20,13 +22,17 @@ const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
 
 // 키보드 사이즈 따서 스크롤밑에 키보드높이만큼 보장해줄 더미View 만들기
 
-const Posting = ({ route }) => {
+const Posting = ({ navigation }) => {
   const headerHeight = useHeaderHeight();
+  const dispatch = useDispatch();
   const scrollRef = useRef();
   const [keboardHeight, setKeboardHeight] = useState(0);
+  const [text, setText] = useState("");
+  const userId = useSelector(state => state.loginReducer.userId);
+  // useSelector addPost 함수안에 넣으니깐 안됨
+  const allPosts = useSelector(state => state.postReducer.allPosts);
 
   useEffect(() => {
-    console.log(Platform.OS);
     Keyboard.addListener("keyboardDidShow", e => {
       setKeboardHeight(e.endCoordinates.height);
     });
@@ -37,26 +43,31 @@ const Posting = ({ route }) => {
       Keyboard.removeAllListeners("keyboardDidShow");
       Keyboard.removeAllListeners("keyboardDidHide");
     };
-  });
+  }, []);
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <View style={styles.headerRightBtn}>
+          <Button title="트윗" color={color.main} onPress={addPost} />
+        </View>
+      ),
+    });
+    // 밑에 text 스테이트값 안넣어주면 최신 text값 못가져온다
+  }, [navigation, text, allPosts]);
+
+  function addPost() {
+    console.log(allPosts);
+    dispatch(postAction.addPost(allPosts, new Date(), userId, text));
+    navigation.navigate("Main", {});
+  }
 
   return (
-    // <Container>
     // <KeyboardAvoidingView
     //   behavior={Platform.OS === "ios" ? "padding" : "height"}
     //   style={styles.container}
     // >
     <View style={styles.container}>
-      <ScrollView
-        contentContainerStyle={{ ...styles.wrapper }}
-        // ref={scroll => (scrollRef.scroll = scroll)}
-        ref={scrollRef}
-        onContentSizeChange={() => {
-          // this.scroll.scrollToEnd();
-          // console.log(scrollRef.scroll);
-          // console.log(this);
-          // this.scrollView.scrollToEnd({ animated: false });
-        }}
-      >
+      <ScrollView contentContainerStyle={{ ...styles.wrapper }} ref={scrollRef}>
         <ProfileBox>
           <ProfileImg source={profile} resizeMode="cover"></ProfileImg>
         </ProfileBox>
@@ -66,17 +77,16 @@ const Posting = ({ route }) => {
           autoFocus={true}
           autoCorrect={false}
           multiline={true}
-          placeholder={`${route.params.id}님 무슨 일이 일어나고 있나요?`}
+          placeholder={`${userId}님 무슨 일이 일어나고 있나요?`}
           heightprops={screenHeight - headerHeight - keboardHeight}
-          // onSubmitEditing={() => Keyboard.dismiss()}
           keyboardType="email-address"
+          onChangeText={payload => setText(payload)}
         ></PostingInput>
         <TextInput></TextInput>
       </ScrollView>
       <View style={{ height: keboardHeight }}></View>
     </View>
     // </KeyboardAvoidingView>
-    // </Container>
   );
 };
 
@@ -93,6 +103,11 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginBottom: 10000,
     padding: 10,
+  },
+  headerRightBtn: {
+    borderRadius: 50,
+    backgroundColor: "white",
+    fontSize: 9,
   },
 });
 

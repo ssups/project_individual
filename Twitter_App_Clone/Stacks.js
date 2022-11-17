@@ -3,14 +3,17 @@ import { StatusBar } from "expo-status-bar";
 import { Button, StyleSheet, Text, View } from "react-native";
 import { Entrance, Main, Posting } from "./src/pages";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { HeaderBackButton } from "@react-navigation/elements";
-import color from "./src/color";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { postAction } from "./src/redux/middleware";
+import color from "./src/color";
 
 const Stack = createNativeStackNavigator();
 
 const Stacks = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -36,7 +39,7 @@ const Stacks = () => {
             // 헤더 밑줄 없애기
             headerShadowVisible: false,
             // headerTransparent: true,
-            headerLeft: props => (
+            headerLeft: () => (
               <Button
                 title="취소"
                 color="red"
@@ -44,11 +47,11 @@ const Stacks = () => {
                 canGoBack={true}
               />
             ),
-            headerRight: () => (
-              <View style={styles.headerRightBtn}>
-                <Button title="트윗" color={color.main} />
-              </View>
-            ),
+            // headerRight: () => (
+            //   <View style={styles.headerRightBtn}>
+            //     <Button title="트윗" color={color.main} />
+            //   </View>
+            // ),
           }}
         />
       </Stack.Navigator>
@@ -64,11 +67,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
   },
-  headerRightBtn: {
-    borderRadius: 50,
-    backgroundColor: "white",
-    fontSize: 9,
-  },
+  // headerRightBtn: {
+  //   borderRadius: 50,
+  //   backgroundColor: "white",
+  //   fontSize: 9,
+  // },
 });
 
 export default Stacks;

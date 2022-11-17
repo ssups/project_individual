@@ -3,12 +3,14 @@ const init = {
   isLogined: false,
 };
 
-export default loginRedcuer = (state = init, { type, payload }) => {
+function reducer(state = init, { type, payload }) {
   switch (type) {
-    case value:
-      break;
+    case "LOGIN":
+      return { ...state, userId: payload.userId, isLogined: true };
 
     default:
       return state;
   }
-};
+}
+
+export default reducer;

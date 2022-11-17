@@ -25,6 +25,7 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import React, { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import { twitter_logo } from "../../images";
 
 const Entrance = ({ navigation }) => {
@@ -33,6 +34,7 @@ const Entrance = ({ navigation }) => {
   const inputIdRef = useRef();
   const inputPwRef = useRef();
   const loginRef = useRef();
+  const dispatch = useDispatch();
 
   const login = () => {
     // 공백처리
@@ -45,6 +47,7 @@ const Entrance = ({ navigation }) => {
       inputPwRef.current.focus();
       return;
     }
+    dispatch({ type: "LOGIN", payload: { userId: id } });
     // 두번째 인수 객체는 parms 값으로 넘어감
     navigation.navigate("Main", { id });
     setId("");

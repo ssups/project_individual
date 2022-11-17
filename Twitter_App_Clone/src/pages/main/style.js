@@ -10,7 +10,7 @@ const Container = styled.View`
 const Wrapper = styled.View`
   /* position: relative; */
   flex: 0.9;
-  width: 80%;
+  width: ${props => props.screenWidth - 50 + "px"};
   background-color: white;
   border-radius: 20px;
 `;
