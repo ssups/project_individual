@@ -7,17 +7,10 @@ const Container = styled.View`
   justify-content: center;
   background-color: ${color.main};
 `;
-const Wrapper = styled.View`
-  /* position: relative; */
-  flex: 0.9;
-  width: ${props => props.screenWidth - 50 + "px"};
-  background-color: white;
-  border-radius: 20px;
-`;
 const PostingBtnBox = styled.View`
   position: absolute;
   bottom: 10px;
-  right: 10px;
+  right: 35px;
 `;
 const PostingBtn = styled.TouchableOpacity`
   background-color: ${color.main};
@@ -33,4 +26,4 @@ const PostingBtnText = styled.Text`
   text-align: center;
 `;
 
-export { Container, Wrapper, PostingBtnBox, PostingBtn, PostingBtnText };
+export { Container, PostingBtnBox, PostingBtn, PostingBtnText };

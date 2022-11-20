@@ -36,16 +36,16 @@ const Main = ({ navigation, route }) => {
               <Text>{post?.postId?.toString()}</Text>
             </View>
           ))}
-        <PostingBtnBox style={styles.shadow}>
-          <PostingBtn
-            onPress={() => {
-              navigation.navigate("Posting", { id: route.params.id });
-            }}
-          >
-            <PostingBtnText>+</PostingBtnText>
-          </PostingBtn>
-        </PostingBtnBox>
       </ScrollView>
+      <PostingBtnBox style={styles.shadow}>
+        <PostingBtn
+          onPress={() => {
+            navigation.navigate("Posting", { id: route.params.id });
+          }}
+        >
+          <PostingBtnText>+</PostingBtnText>
+        </PostingBtn>
+      </PostingBtnBox>
     </Container>
   );
 };
@@ -57,7 +57,11 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 20,
   },
-  shadow: { shadowOffset: { width: 3, height: 3 }, shadowColor: "black", shadowOpacity: 1 },
+  shadow: {
+    shadowOffset: { width: 3, height: 3 },
+    shadowColor: "black",
+    shadowOpacity: 1,
+  },
 });
 
 export default Main;
