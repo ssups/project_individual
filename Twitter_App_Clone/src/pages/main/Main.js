@@ -143,7 +143,7 @@ const Main = ({ navigation }) => {
 const styles = StyleSheet.create({
   wrapper: {
     width: screenWidth - 50,
-    backgroundColor: "white",
+    backgroundColor: "#ffffff",
     borderRadius: 20,
   },
   shadow: {
