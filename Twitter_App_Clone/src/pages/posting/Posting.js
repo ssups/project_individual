@@ -10,19 +10,15 @@ import {
   ScrollView,
   View,
   Button,
+  Alert,
 } from "react-native";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { useSelector, useDispatch } from "react-redux";
 import { postAction } from "../../redux/middleware";
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
-// console.log(Dimensions.get("window"));
 
-// 유저아이디값 스토리지에 저장하기 뒤로가기하면 삭제됨
-
-// 키보드 사이즈 따서 스크롤밑에 키보드높이만큼 보장해줄 더미View 만들기
-
-const Posting = ({ navigation }) => {
+const Posting = ({ navigation, route }) => {
   const headerHeight = useHeaderHeight();
   const dispatch = useDispatch();
   const scrollRef = useRef();
@@ -31,6 +27,7 @@ const Posting = ({ navigation }) => {
   const userId = useSelector(state => state.loginReducer.userId);
   // useSelector addPost 함수안에 넣으니깐 안됨
   const allPosts = useSelector(state => state.postReducer.allPosts);
+  const mode = route.params.mode;
 
   useEffect(() => {
     Keyboard.addListener("keyboardDidShow", e => {
@@ -48,7 +45,11 @@ const Posting = ({ navigation }) => {
     navigation.setOptions({
       headerRight: () => (
         <View style={styles.headerRightBtn}>
-          <Button title="트윗" color={color.main} onPress={addPost} />
+          {mode === "posting" ? (
+            <Button title="트윗" color={color.main} onPress={addPost} />
+          ) : (
+            <Button title="수정" color={color.main} onPress={modifyPost} />
+          )}
         </View>
       ),
     });
@@ -56,9 +57,19 @@ const Posting = ({ navigation }) => {
   }, [navigation, text, allPosts]);
 
   function addPost() {
-    console.log(allPosts);
-    dispatch(postAction.addPost(allPosts, new Date(), userId, text));
-    navigation.navigate("Main", {});
+    if (text === "" || text.replaceAll(" ", "") === "") {
+      Alert.alert("경고", "내용을 입력해주세요");
+      return;
+    }
+    dispatch(postAction.addPost(allPosts, new Date(), userId, text, navigation));
+  }
+  function modifyPost() {
+    if (text === "" || text.replaceAll(" ", "") === "") {
+      Alert.alert("경고", "내용을 입력해주세요");
+      return;
+    }
+    const { postId } = route.params;
+    dispatch(postAction.modifyPost(allPosts, postId, text, navigation));
   }
 
   return (
@@ -77,10 +88,11 @@ const Posting = ({ navigation }) => {
           autoFocus={true}
           autoCorrect={false}
           multiline={true}
-          placeholder={`${userId}님 무슨 일이 일어나고 있나요?`}
+          placeholder={mode === "posting" ? `${userId}님 무슨 일이 일어나고 있나요?` : null}
           heightprops={screenHeight - headerHeight - keboardHeight}
           keyboardType="email-address"
           onChangeText={payload => setText(payload)}
+          defaultValue={mode === "modifying" ? route.params.text : null}
         ></PostingInput>
         <TextInput></TextInput>
       </ScrollView>

@@ -4,11 +4,11 @@ const init = {
 
 function reducer(state = init, { type, payload }) {
   switch (type) {
-    case "ADD_POST":
-      return { ...state, allPosts: payload.addedAllPosts };
+    case "UPDATE_POST":
+      return { ...state, allPosts: payload.updatedAllPosts.reverse() };
 
     case "GET_ALL_POSTS":
-      return { allPosts: payload.allPosts };
+      return { allPosts: payload.allPosts.reverse() };
 
     default:
       return state;

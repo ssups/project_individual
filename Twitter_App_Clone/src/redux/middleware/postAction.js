@@ -16,16 +16,47 @@ function getAllPosts() {
   };
 }
 
-function addPost(allPosts, postId, writer, text) {
-  const addedAllPosts = [...allPosts, { postId, writer, text }];
+function addPost(allPosts, postId, writer, text, navigation) {
+  const updatedAllPosts = [...allPosts.reverse(), { postId, writer, text }];
   return async (dispatch, state) => {
     try {
-      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(addedAllPosts));
-      dispatch({ type: "ADD_POST", payload: { addedAllPosts } });
+      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updatedAllPosts));
+      await dispatch({ type: "UPDATE_POST", payload: { updatedAllPosts } });
+      navigation.navigate("Main", {});
     } catch (err) {
       console.log(err);
     }
   };
 }
 
-export default { getAllPosts, addPost };
+function delPost(allPosts, postId) {
+  const updatedAllPosts = allPosts.filter(post => post.postId !== postId).reverse();
+  return async (dispatch, state) => {
+    try {
+      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updatedAllPosts));
+      dispatch({ type: "UPDATE_POST", payload: { updatedAllPosts } });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+
+function modifyPost(allPosts, postId, modifiedText, navigation) {
+  const updatedAllPosts = allPosts
+    .map(post => {
+      if (post.postId === postId) post.text = modifiedText;
+      return post;
+    })
+    .reverse();
+  return async (dispatch, state) => {
+    try {
+      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updatedAllPosts));
+      dispatch({ type: "UPDATE_POST", payload: { updatedAllPosts } });
+      navigation.navigate("Main", {});
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+
+export default { getAllPosts, addPost, delPost, modifyPost };
